@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты и расположение — Дворец Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#130810;--bg2:#1E0D1A;--bg3:#2A1225;
+  --rose:#C41F5E;--rose-h:#E0256E;--rose-p:#F5D0DF;
+  --gold:#C8973A;--gold-l:#E8C97A;
+  --white:#FFFFFF;
+  --w80:rgba(255,255,255,.8);--w60:rgba(255,255,255,.6);
+  --w50:rgba(255,255,255,.5);--w20:rgba(255,255,255,.2);
+  --w08:rgba(255,255,255,.08);--w04:rgba(255,255,255,.04);
+  --border:rgba(200,151,58,.2);
+  --font-d:'Cormorant Garamond',serif;--font-b:'Raleway',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--white);font-size:15px;line-height:1.7;font-weight:400;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(19,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.9rem}
+.nav-logo-gem{width:32px;height:37px;flex-shrink:0}
+.nav-logo-text{font-family:var(--font-d);font-size:.78rem;font-weight:600;letter-spacing:.08em;line-height:1.35;color:var(--white);text-transform:uppercase}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w80);transition:color .3s;font-weight:500}
+.nav-links a:hover{color:var(--gold-l)}
+.nav-links a.active{color:var(--gold-l);border-bottom:1px solid var(--gold);padding-bottom:2px}
+.nav-btn{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;padding:.65rem 1.6rem;border:1px solid var(--rose);color:var(--white);background:transparent;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s}
+.nav-btn:hover{background:var(--rose)}
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:24px;height:1.5px;background:var(--white)}
+
+/* PAGE HERO */
+.page-hero{position:relative;min-height:55vh;display:flex;align-items:flex-end;padding:0 4rem 5rem;overflow:hidden;background:var(--bg)}
+.hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 100% at 70% 40%,rgba(196,31,94,.12),transparent 55%),radial-gradient(ellipse 50% 80% at 5% 80%,rgba(200,151,58,.07),transparent 50%),linear-gradient(to top,rgba(19,8,16,.92) 0%,transparent 60%)}
+.hero-crystal{position:absolute;right:3rem;top:50%;transform:translateY(-50%);opacity:.16;pointer-events:none}
+.hero-crystal svg{width:280px;height:320px}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-title{font-family:var(--font-d);font-size:clamp(3.2rem,8vw,6.5rem);font-weight:300;line-height:.9;letter-spacing:-.02em}
+.hero-title em{font-style:italic;color:var(--gold-l);display:block}
+.hero-sub{font-size:.9rem;color:var(--w50);margin-top:1.4rem;max-width:440px;line-height:1.9;font-weight:300}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero-eyebrow{animation:fadeUp .8s ease both .2s}
+.hero-title{animation:fadeUp .8s ease both .38s}
+.hero-sub{animation:fadeUp .8s ease both .54s}
+
+/* MAP SECTION */
+.map-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.map-layout{display:grid;grid-template-columns:380px 1fr;min-height:520px}
+
+/* sidebar */
+.map-sidebar{background:var(--bg3);padding:3rem 2.5rem;display:flex;flex-direction:column;gap:2rem;border-right:1px solid var(--border)}
+.map-sidebar-title{font-family:var(--font-d);font-size:1.8rem;font-weight:300;line-height:1.1}
+.map-sidebar-title em{font-style:italic;color:var(--gold-l)}
+.contact-block{display:flex;flex-direction:column;gap:1rem}
+.contact-row{display:flex;align-items:flex-start;gap:1rem}
+.contact-icon{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.contact-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.contact-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w50);margin-bottom:.2rem}
+.contact-value{font-size:.88rem;color:var(--w80);line-height:1.5}
+.contact-value a{color:var(--w80);transition:color .3s}
+.contact-value a:hover{color:var(--gold-l)}
+.map-cta-btn{display:inline-flex;align-items:center;gap:.7rem;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;padding:.9rem 1.8rem;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));width:fit-content}
+.map-cta-btn:hover{background:var(--rose-h)}
+.map-cta-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.social-row{display:flex;gap:.6rem}
+.social-pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem .9rem;border:1px solid var(--border);color:var(--gold-l);transition:all .3s;font-weight:600}
+.social-pill:hover{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.social-pill svg{width:14px;height:14px;fill:currentColor}
+
+/* map embed */
+.map-embed{position:relative;flex:1;background:var(--bg3);min-height:400px}
+.map-embed iframe{width:100%;height:100%;border:none;display:block;filter:saturate(.7) brightness(.85)}
+.map-overlay-label{position:absolute;top:1rem;right:1rem;background:rgba(19,8,16,.85);border:1px solid var(--border);padding:.6rem 1rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);backdrop-filter:blur(8px)}
+
+/* HOW TO GET THERE */
+.howto-section{background:var(--bg);padding:6rem 4rem;border-bottom:1px solid var(--border)}
+.howto-inner{max-width:1300px;margin:0 auto}
+.sec-eyebrow{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:300;line-height:1.05}
+.sec-title em{font-style:italic;color:var(--gold-l)}
+.howto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
+.howto-card{background:var(--bg2);padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .3s}
+.howto-card:hover{border-top-color:var(--gold)}
+.howto-icon{width:52px;height:52px;margin-bottom:1.5rem;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:border-color .3s}
+.howto-card:hover .howto-icon{border-color:var(--gold)}
+.howto-icon svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.4}
+.howto-card h3{font-family:var(--font-d);font-size:1.2rem;font-weight:400;margin-bottom:.8rem}
+.howto-card p{font-size:.82rem;color:var(--w50);line-height:1.8;font-weight:300}
+.howto-card p strong{color:var(--gold-l);font-weight:500}
+.howto-card .howto-detail{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.75rem;color:var(--w50);line-height:1.6}
+
+/* WORKING HOURS */
+.hours-section{background:var(--bg2);padding:6rem 4rem;border-bottom:1px solid var(--border)}
+.hours-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.hours-table{margin-top:2rem}
+.hours-row{display:grid;grid-template-columns:1fr auto;padding:1rem 1.5rem;background:var(--bg3);margin-bottom:2px;border-left:2px solid transparent;transition:border-color .3s}
+.hours-row:hover{border-left-color:var(--gold)}
+.hours-row.weekend{background:var(--bg)}
+.hours-row.weekend .hours-day{color:var(--rose-p)}
+.hours-day{font-size:.82rem;font-weight:500}
+.hours-time{font-family:var(--font-d);font-size:1rem;font-weight:300;color:var(--gold-l)}
+.hours-time.closed{color:var(--w50);font-family:var(--font-b);font-size:.78rem}
+.hours-note{margin-top:1.5rem;padding:1.2rem 1.5rem;background:rgba(196,31,94,.08);border-left:2px solid var(--rose);font-size:.78rem;color:var(--w60);line-height:1.7}
+
+/* FEEDBACK FORM */
+.feedback-section{background:var(--bg3);padding:6rem 4rem;border-bottom:1px solid var(--border)}
+.feedback-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.feedback-left{}
+.feedback-left p{font-size:.88rem;color:var(--w50);margin-top:1.2rem;line-height:1.9;font-weight:300;max-width:420px}
+.feedback-contacts-alt{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem}
+.fca-item{display:flex;align-items:center;gap:1rem}
+.fca-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fca-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.fca-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--w50)}
+.fca-val{font-size:.9rem;color:var(--w80)}
+.fca-val a{transition:color .3s}
+.fca-val a:hover{color:var(--gold-l)}
+
+/* form */
+.feedback-form{display:flex;flex-direction:column;gap:1rem}
+.ff-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ff-field{display:flex;flex-direction:column}
+.ff-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w50);margin-bottom:.35rem}
+.ff-input,.ff-select,.ff-textarea{background:var(--bg2);border:1px solid var(--border);color:var(--white);padding:.85rem 1rem;font-family:var(--font-b);font-size:.85rem;outline:none;transition:border-color .3s;appearance:none}
+.ff-input:focus,.ff-select:focus,.ff-textarea:focus{border-color:var(--gold)}
+.ff-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C8973A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-color:var(--bg2);padding-right:2.5rem}
+.ff-select option{background:var(--bg2)}
+.ff-textarea{resize:vertical;min-height:120px}
+.ff-consent{font-size:.68rem;color:var(--w50);line-height:1.6}
+.ff-consent a{color:var(--gold)}
+.ff-submit{align-self:flex-start;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:1rem 2.5rem;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:var(--font-b);font-weight:700;transition:all .3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.ff-submit:hover{background:var(--rose-h)}
+.ff-success{display:none;padding:2.5rem;background:var(--bg2);text-align:center;border:1px solid var(--border)}
+.ff-success-icon{font-size:2.5rem;display:block;margin-bottom:.8rem}
+.ff-success h3{font-family:var(--font-d);font-size:1.8rem;color:var(--gold-l);margin-bottom:.5rem}
+.ff-success p{font-size:.82rem;color:var(--w50);line-height:1.6}
+
+/* FOOTER */
+footer{background:rgba(10,4,9,1);padding:4rem 4rem 2rem;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:3rem;max-width:1300px;margin:0 auto 3rem}
+.footer-socials{display:flex;gap:.7rem;margin-top:1.5rem}
+.footer-social{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.footer-social:hover{border-color:var(--rose);background:var(--rose)}
+.footer-social svg{width:16px;height:16px;fill:var(--w80)}
+.footer-col h4{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{font-size:.78rem;color:var(--w50);transition:color .3s}
+.footer-col ul li a:hover{color:var(--gold-l)}
+.footer-contact{font-size:.78rem;color:var(--w50);line-height:1.7}
+.footer-contact a{color:var(--w80);transition:color .3s}
+.footer-contact a:hover{color:var(--gold-l)}
+.footer-bottom{max-width:1300px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--w04);display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.2)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:.65rem;color:rgba(255,255,255,.2);transition:color .3s}
+.footer-bottom-links a:hover{color:var(--w50)}
+
+/* mobile */
+.mobile-menu{position:fixed;inset:0;z-index:600;background:rgba(19,8,16,.98);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:var(--font-d);font-size:2.2rem;font-weight:300;color:var(--w80);transition:color .3s}
+.mobile-menu a:hover{color:var(--gold-l)}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:var(--w50);font-size:1.8rem;padding:.5rem;line-height:1}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+
+@media(max-width:1024px){
+  nav,.page-hero,.howto-section,.hours-section,.feedback-section,footer{padding-left:2rem;padding-right:2rem}
+  .nav-links,.nav-btn{display:none}
+  .burger{display:flex}
+  .map-layout{grid-template-columns:1fr;grid-template-rows:auto 400px}
+  .map-sidebar{border-right:none;border-bottom:1px solid var(--border)}
+  .howto-grid{grid-template-columns:1fr 1fr}
+  .hours-inner,.feedback-inner{grid-template-columns:1fr;gap:3rem}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .hero-crystal{display:none}
+}
+@media(max-width:640px){
+  .howto-grid{grid-template-columns:1fr}
+  .ff-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="index.html">Главная</a>
+  <a href="about.html">О дворце</a>
+  <a href="index.html#programs">Занятия</a>
+  <a href="events.html">Мероприятия</a>
+  <a href="rent.html">Арендаторам</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="location.html">Контакты</a>
+</div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">О дворце</a></li>
+    <li><a href="index.html#programs">Занятия</a></li>
+    <li><a href="events.html">Мероприятия</a></li>
+    <li><a href="rent.html">Арендаторам</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="location.html" class="active">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="#feedback">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-crystal">
+    <svg viewBox="0 0 280 320" fill="none">
+      <polygon points="140,4 274,68 274,252 140,316 6,252 6,68" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+      <polygon points="140,26 248,80 248,240 140,294 32,240 32,80" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.18)" stroke-width=".6"/>
+      <polygon points="140,58 214,98 214,222 140,262 66,222 66,98" fill="rgba(196,31,94,0.06)"/>
+      <line x1="140" y1="4" x2="140" y2="58" stroke="rgba(200,151,58,0.45)" stroke-width=".8"/>
+      <line x1="274" y1="68" x2="214" y2="98" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="274" y1="252" x2="214" y2="222" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="140" y1="316" x2="140" y2="262" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="6" y1="252" x2="66" y2="222" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="6" y1="68" x2="66" y2="98" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Дворец Ирины Винер</div>
+    <h1 class="hero-title">РАСПОЛОЖЕНИЕ<br><em>И КОНТАКТЫ</em></h1>
+    <p class="hero-sub">Мы находимся в Новой Москве — посёлке Ватутинки, в инновационном квартале Russian Design District.</p>
+  </div>
+</div>
+
+<!-- MAP + CONTACTS -->
+<div class="map-section" id="contacts">
+  <div class="map-layout">
+    <div class="map-sidebar">
+      <div class="map-sidebar-title">Найдите <em>нас</em></div>
+
+      <div class="contact-block">
+        <div class="contact-row reveal">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <div class="contact-label">Адрес</div>
+            <div class="contact-value">г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><span style="font-size:.75rem;color:var(--w50)">Russian Design District</span></div>
+          </div>
+        </div>
+
+        <div class="contact-row reveal">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="contact-label">Телефон (бесплатно)</div>
+            <div class="contact-value"><a href="tel:+78007005174">8 (800) 700-51-74</a></div>
+          </div>
+        </div>
+
+        <div class="contact-row reveal">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a></div>
+          </div>
+        </div>
+
+        <div class="contact-row reveal">
+          <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
+          <div>
+            <div class="contact-label">Сайт</div>
+            <div class="contact-value"><a href="https://gympalace.ru" target="_blank">gympalace.ru</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <a class="map-cta-btn" href="https://yandex.ru/maps/?pt=37.318500,55.518900&z=16&l=map" target="_blank">
+          ОТКРЫТЬ В ЯНДЕКС КАРТАХ
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <div class="reveal">
+        <div class="contact-label" style="margin-bottom:.8rem">Социальные сети</div>
+        <div class="social-row">
+          <a class="social-pill" href="https://vk.com/center_viner_vatutinki" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg>
+            ВК
+          </a>
+          <a class="social-pill" href="https://t.me/center_viner_vatutinki" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+            TG
+          </a>
+          <a class="social-pill" href="https://youtube.com" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            YT
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- YANDEX MAP EMBED -->
+    <div class="map-embed">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3A&amp;source=constructor&amp;ll=37.318500%2C55.518900&amp;z=15&amp;l=map&amp;pt=37.318500%2C55.518900%2Cpm2rdm~37.318500%2C55.518900%2Cpm2rdl"
+        allowfullscreen="true"
+        loading="lazy"
+        title="Расположение Дворца Ирины Винер">
+      </iframe>
+      <div class="map-overlay-label">📍 Ватутинки, Russian Design District</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW TO GET THERE -->
+<section class="howto-section">
+  <div class="howto-inner">
+    <div class="sec-eyebrow reveal">Маршрут</div>
+    <h2 class="sec-title reveal">Как <em>добраться</em></h2>
+    <div class="howto-grid">
+      <div class="howto-card reveal rd1">
+        <div class="howto-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>На автомобиле</h3>
+        <p>По Калужскому шоссе до поворота на Ватутинки. Въезд через <strong>Russian Design District</strong>, следуйте указателям к Дворцу спорта.</p>
+        <div class="howto-detail">🅿️ Бесплатная парковка на 200 мест у входа в комплекс</div>
+      </div>
+      <div class="howto-card reveal rd2">
+        <div class="howto-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        <h3>На метро и автобусе</h3>
+        <p>Метро <strong>Тёплый Стан</strong> или <strong>Коммунарка</strong>, затем автобус № 964, 965 до остановки <strong>«Ватутинки»</strong>. Время в пути — около 25 минут.</p>
+        <div class="howto-detail">🚌 Автобусы ходят каждые 15–20 минут в часы пик</div>
+      </div>
+      <div class="howto-card reveal rd3">
+        <div class="howto-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Время в пути</h3>
+        <p>От МКАД по Калужскому шоссе — <strong>15–20 минут</strong>. От метро Тёплый Стан — <strong>25–30 минут</strong> на автобусе. От Москва-ити — около <strong>40 минут</strong>.</p>
+        <div class="howto-detail">🗺️ Координаты: 55.518900, 37.318500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING HOURS -->
+<section class="hours-section">
+  <div class="hours-inner">
+    <div>
+      <div class="sec-eyebrow reveal">Режим работы</div>
+      <h2 class="sec-title reveal">Часы <em>работы</em></h2>
+      <p class="reveal" style="font-size:.85rem;color:var(--w50);margin-top:.8rem;font-weight:300;max-width:340px">Администрация и тренировки — расписание актуально для текущего сезона</p>
+      <div class="hours-note reveal" style="margin-top:1.5rem">
+        ⚠️ В дни соревнований и официальных мероприятий режим работы может меняться. Уточняйте по телефону или в соцсетях.
+      </div>
+    </div>
+    <div class="hours-table reveal">
+      <div class="hours-row">
+        <div class="hours-day">Понедельник</div>
+        <div class="hours-time">08:00 — 21:00</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Вторник</div>
+        <div class="hours-time">08:00 — 21:00</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Среда</div>
+        <div class="hours-time">08:00 — 21:00</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Четверг</div>
+        <div class="hours-time">08:00 — 21:00</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Пятница</div>
+        <div class="hours-time">08:00 — 21:00</div>
+      </div>
+      <div class="hours-row weekend">
+        <div class="hours-day">Суббота</div>
+        <div class="hours-time">09:00 — 18:00</div>
+      </div>
+      <div class="hours-row weekend">
+        <div class="hours-day">Воскресенье</div>
+        <div class="hours-time closed">по расписанию</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK FORM -->
+<section class="feedback-section" id="feedback">
+  <div class="feedback-inner">
+    <div class="feedback-left">
+      <div class="sec-eyebrow reveal">Обратная связь</div>
+      <h2 class="sec-title reveal">Напишите <em>нам</em></h2>
+      <p class="reveal">Задайте вопрос, оставьте заявку или предложение — мы ответим в течение рабочего дня.</p>
+      <div class="feedback-contacts-alt reveal">
+        <div class="fca-item">
+          <div class="fca-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="fca-label">Телефон</div>
+            <div class="fca-val"><a href="tel:+78007005174">8 (800) 700-51-74</a></div>
+          </div>
+        </div>
+        <div class="fca-item">
+          <div class="fca-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <div class="fca-label">Email</div>
+            <div class="fca-val"><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a></div>
+          </div>
+        </div>
+        <div class="fca-item">
+          <div class="fca-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div>
+            <div class="fca-label">Telegram</div>
+            <div class="fca-val"><a href="https://t.me/center_viner_vatutinki" target="_blank">@center_viner_vatutinki</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div id="feedbackFormWrap">
+        <div class="feedback-form">
+          <div class="ff-row">
+            <div class="ff-field">
+              <span class="ff-label">Имя</span>
+              <input class="ff-input" type="text" placeholder="Ваше имя" required>
+            </div>
+            <div class="ff-field">
+              <span class="ff-label">Телефон</span>
+              <input class="ff-input" type="tel" placeholder="+7 (___) ___-__-__">
+            </div>
+          </div>
+          <div class="ff-field">
+            <span class="ff-label">Email</span>
+            <input class="ff-input" type="email" placeholder="your@email.ru">
+          </div>
+          <div class="ff-field">
+            <span class="ff-label">Тема обращения</span>
+            <select class="ff-select">
+              <option>Запись на занятия</option>
+              <option>Аренда зала</option>
+              <option>Вопрос по расписанию</option>
+              <option>Сотрудничество</option>
+              <option>Пресса и медиа</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="ff-field">
+            <span class="ff-label">Сообщение</span>
+            <textarea class="ff-textarea" placeholder="Опишите ваш вопрос или пожелание..."></textarea>
+          </div>
+          <p class="ff-consent">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a> и даёте согласие на обработку персональных данных</p>
+          <button class="ff-submit" onclick="submitFeedback()">ОТПРАВИТЬ СООБЩЕНИЕ →</button>
+        </div>
+      </div>
+      <div class="ff-success" id="feedbackSuccess">
+        <span class="ff-success-icon">✦</span>
+        <h3>Сообщение отправлено!</h3>
+        <p>Спасибо за обращение. Мы свяжемся с вами в течение рабочего дня.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a class="nav-logo" href="index.html" style="display:flex;margin-bottom:1rem">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:.7rem">
+          <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Навигация</h4><ul><li><a href="about.html">О дворце</a></li><li><a href="about.html#team">Коллектив</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="gallery.html">Галерея</a></li><li><a href="rent.html">Арендаторам</a></li><li><a href="location.html">Контакты</a></li></ul></div>
+    <div class="footer-col"><h4>Направления</h4><ul><li><a href="index.html#programs">Художественная гимнастика</a></li><li><a href="index.html#programs">Хореография</a></li><li><a href="index.html#programs">ОФП</a></li><li><a href="index.html#programs">Стретчинг для взрослых</a></li></ul></div>
+    <div class="footer-col"><h4>Контакты</h4><div class="footer-contact">г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br><a href="tel:+78007005174">8 (800) 700-51-74</a><br><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a></div></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+  </div>
+</footer>
+
+<script>
+function openMob(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+function submitFeedback(){
+  document.getElementById('feedbackFormWrap').style.display = 'none';
+  document.getElementById('feedbackSuccess').style.display = 'block';
+}
+
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+</script>
+</body>
+</html>

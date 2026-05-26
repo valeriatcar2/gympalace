@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дворец спорта и образования Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #130810;
+  --bg2:      #1E0D1A;
+  --bg3:      #2A1225;
+  --rose:     #C41F5E;
+  --rose-h:   #E0256E;
+  --rose-pale:#F5D0DF;
+  --gold:     #C8973A;
+  --gold-l:   #E8C97A;
+  --gold-p:   rgba(200,151,58,0.15);
+  --white:    #FFFFFF;
+  --w80:      rgba(255,255,255,0.8);
+  --w50:      rgba(255,255,255,0.5);
+  --w20:      rgba(255,255,255,0.2);
+  --w08:      rgba(255,255,255,0.08);
+  --w04:      rgba(255,255,255,0.04);
+  --border:   rgba(200,151,58,0.2);
+  --font-d:   'Cormorant Garamond', serif;
+  --font-b:   'Raleway', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-b); background: var(--bg); color: var(--white); font-size: 15px; line-height: 1.7; font-weight: 400; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem 4rem;
+  transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+nav.scrolled {
+  background: rgba(19,8,16,0.92);
+  backdrop-filter: blur(20px);
+  padding: 1rem 4rem;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 0.9rem; }
+.nav-logo-gem { width: 38px; height: 44px; flex-shrink: 0; }
+.nav-logo-text { font-family: var(--font-d); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; line-height: 1.35; color: var(--white); text-transform: uppercase; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--w80); transition: color 0.3s; font-weight: 500; }
+.nav-links a:hover { color: var(--gold-l); }
+.nav-btn {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.65rem 1.6rem; border: 1px solid var(--rose);
+  color: var(--white); background: transparent; cursor: pointer;
+  font-family: var(--font-b); font-weight: 600; transition: all 0.3s;
+}
+.nav-btn:hover { background: var(--rose); }
+.burger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+.burger span { display: block; width: 24px; height: 1.5px; background: var(--white); transition: all 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: flex-end;
+  padding: 0 4rem 6rem; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(100deg, rgba(19,8,16,0.92) 0%, rgba(19,8,16,0.7) 45%, rgba(19,8,16,0.1) 75%, transparent 100%),
+    linear-gradient(to top, rgba(19,8,16,0.8) 0%, transparent 40%);
+  z-index: 1;
+}
+/* Simulated building with crystal shapes since no real photo */
+.hero-visual {
+  position: absolute; inset: 0; z-index: 0;
+  background: 
+    radial-gradient(ellipse 80% 70% at 75% 40%, rgba(60,10,50,1) 0%, rgba(30,5,25,1) 40%, var(--bg) 100%);
+}
+.hero-crystal-bg { position: absolute; right: 0; top: 0; bottom: 0; width: 65%; z-index: 0; }
+.hero-crystal-bg svg { width: 100%; height: 100%; }
+.hero-content { position: relative; z-index: 2; max-width: 620px; }
+.hero-slide-num {
+  position: absolute; right: 4rem; bottom: 6rem; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.hero-slide-active { font-family: var(--font-d); font-size: 1.4rem; font-weight: 300; color: var(--gold-l); }
+.hero-slide-line { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); }
+.hero-slide-total { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--w50); }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold-l); margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+.hero-title {
+  font-family: var(--font-d);
+  font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+  font-weight: 300; line-height: 0.9; letter-spacing: -0.02em;
+  color: var(--white); margin-bottom: 1.8rem;
+}
+.hero-title .accent { color: var(--gold-l); font-style: italic; display: block; }
+.hero-sub {
+  font-size: 0.88rem; color: var(--w80); line-height: 1.85;
+  max-width: 360px; margin-bottom: 2.5rem; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-rose {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 1rem 2rem; background: var(--rose); color: var(--white);
+  border: none; cursor: pointer; font-family: var(--font-b); font-weight: 600;
+  transition: all 0.3s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.btn-rose:hover { background: var(--rose-h); }
+.btn-rose svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+.btn-ghost-white {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 1rem 1.8rem; background: transparent; color: var(--w80);
+  border: 1px solid var(--w20); cursor: pointer; font-family: var(--font-b);
+  transition: all 0.3s;
+}
+.btn-ghost-white:hover { border-color: var(--gold); color: var(--gold-l); }
+.hero-scroll {
+  position: absolute; left: 4rem; bottom: 2.5rem; z-index: 2;
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--w50);
+}
+.hero-scroll::after { content: ''; width: 40px; height: 1px; background: var(--w20); }
+
+/* ── FEATURES BAR ── */
+.features {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); padding: 2.5rem 4rem;
+}
+.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 1300px; margin: 0 auto; }
+.feature-item {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  padding: 0.5rem 2rem 0.5rem 0; border-right: 1px solid var(--border);
+}
+.feature-item:first-child { padding-left: 0; }
+.feature-item:last-child { border-right: none; padding-right: 0; }
+.feature-icon { flex-shrink: 0; margin-top: 3px; }
+.feature-icon svg { width: 36px; height: 36px; }
+.feature-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-l); font-weight: 600; margin-bottom: 0.3rem; }
+.feature-desc { font-size: 0.78rem; color: var(--w50); line-height: 1.5; font-weight: 300; }
+
+/* ── THREE CARDS ── */
+.three-cards { display: grid; grid-template-columns: 1fr 1.1fr 1fr; min-height: 480px; }
+.tcard {
+  position: relative; overflow: hidden; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem;
+}
+.tcard-bg {
+  position: absolute; inset: 0; z-index: 0;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.tcard:hover .tcard-bg { transform: scale(1.06); }
+.tcard-bg-1 { background: linear-gradient(135deg, #3D0A25 0%, #1A0510 50%, #0D0308 100%); }
+.tcard-bg-2 { background: linear-gradient(135deg, #1A0C2E 0%, #0D0518 50%, #060210 100%); }
+.tcard-bg-3 { background: linear-gradient(135deg, #2E0D1A 0%, #180810 50%, #0A0408 100%); }
+/* Decorative shimmer per card */
+.tcard-bg-1::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(196,31,94,0.3), transparent 60%); }
+.tcard-bg-2::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 50% 20%, rgba(200,151,58,0.2), transparent 60%); }
+.tcard-bg-3::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 20% 20%, rgba(196,31,94,0.25), transparent 60%); }
+.tcard-overlay { position:absolute; inset:0; z-index:1; background: linear-gradient(to top, rgba(10,3,8,0.85) 0%, rgba(10,3,8,0.2) 60%, transparent 100%); }
+.tcard-content { position: relative; z-index: 2; }
+.tcard-tag {
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-l); margin-bottom: 0.8rem; font-weight: 600;
+}
+.tcard h2 { font-family: var(--font-d); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.05; margin-bottom: 0.8rem; }
+.tcard p { font-size: 0.78rem; color: var(--w50); line-height: 1.65; margin-bottom: 1.5rem; font-weight: 300; max-width: 240px; }
+.tcard-link {
+  font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rose-pale);
+  display: flex; align-items: center; gap: 0.5rem; font-weight: 600; transition: gap 0.3s;
+}
+.tcard:hover .tcard-link { gap: 0.9rem; }
+.tcard-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+.tcard-corner-icon {
+  position: absolute; right: 1.5rem; bottom: 1.5rem; z-index: 2;
+  width: 44px; height: 44px; background: var(--rose); display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.tcard-corner-icon svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 1.5; }
+
+/* ── MEDALS ── */
+.medals {
+  background: var(--bg); padding: 6rem 4rem;
+  position: relative; overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+.medals::before {
+  content: ''; position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(196,31,94,0.06), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 15% 50%, rgba(200,151,58,0.05), transparent 50%),
+    radial-gradient(ellipse 40% 40% at 85% 50%, rgba(200,151,58,0.05), transparent 50%);
+}
+.medals-inner { max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+.medals-header { text-align: center; margin-bottom: 4rem; }
+.medals-eyebrow { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.8rem; }
+.medals-eyebrow::before,.medals-eyebrow::after { content:''; width: 40px; height: 1px; background: var(--gold); }
+.medals-title { font-family: var(--font-d); font-size: clamp(2rem,4vw,3.5rem); font-weight: 300; }
+.medals-title em { font-style: italic; color: var(--gold-l); }
+.medals-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.medal-card {
+  padding: 3.5rem 2.5rem; text-align: center; position: relative; overflow: hidden;
+  border: 1px solid transparent; transition: border-color 0.4s;
+}
+.medal-card:hover { border-color: var(--border); }
+.mc-gold { background: linear-gradient(160deg, rgba(40,28,8,1) 0%, rgba(25,17,5,1) 100%); }
+.mc-silver { background: linear-gradient(160deg, rgba(20,20,28,1) 0%, rgba(13,13,18,1) 100%); }
+.mc-bronze { background: linear-gradient(160deg, rgba(30,18,10,1) 0%, rgba(18,11,6,1) 100%); }
+.medal-gem { margin: 0 auto 1.5rem; width: 70px; height: 70px; }
+.medal-gem svg { width: 70px; height: 70px; }
+.medal-count { font-family: var(--font-d); font-size: clamp(4rem,6vw,6rem); font-weight: 300; line-height: 1; display: block; }
+.mc-gold .medal-count { color: var(--gold-l); }
+.mc-silver .medal-count { color: #C8D4DC; }
+.mc-bronze .medal-count { color: #CD8C52; }
+.medal-label { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--w50); margin-top: 0.6rem; }
+.medal-desc { font-size: 0.73rem; color: rgba(255,255,255,0.2); margin-top: 0.3rem; }
+
+/* ── PROGRAMS (занятия) ── */
+.programs-section { background: var(--bg2); padding: 6rem 4rem; border-top: 1px solid var(--border); }
+.programs-inner { max-width: 1300px; margin: 0 auto; }
+.section-head { margin-bottom: 3rem; }
+.section-eyebrow { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+.section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.section-title { font-family: var(--font-d); font-size: clamp(2rem,4.5vw,3.6rem); font-weight: 300; line-height: 1.05; }
+.section-title em { font-style: italic; color: var(--gold-l); }
+.section-title .rose { color: #F0A8BB; }
+.prog-tabs { display: flex; gap: 0; border: 1px solid var(--border); width: fit-content; margin-bottom: 2.5rem; }
+.p-tab { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.7rem 1.4rem; cursor: pointer; background: transparent; color: var(--w50); border: none; font-family: var(--font-b); font-weight: 600; transition: all 0.3s; border-right: 1px solid var(--border); }
+.p-tab:last-child { border-right: none; }
+.p-tab.active { background: var(--rose); color: var(--white); }
+.prog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 2px; }
+.prog-card { background: var(--bg3); padding: 2rem 1.8rem; border-top: 2px solid transparent; transition: border-color 0.3s; display: none; flex-direction: column; }
+.prog-card.vis { display: flex; }
+.prog-card:hover { border-top-color: var(--rose); }
+.prog-card.adult:hover { border-top-color: var(--gold); }
+.prog-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.22rem 0.7rem; background: rgba(196,31,94,0.18); color: #F0A8BB; display: inline-block; margin-bottom: 1rem; width: fit-content; }
+.prog-card.adult .prog-tag { background: rgba(200,151,58,0.15); color: var(--gold-l); }
+.prog-card h3 { font-family: var(--font-d); font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.2; }
+.prog-rows { flex: 1; }
+.prog-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.75rem; color: var(--w50); border-bottom: 1px solid var(--w04); padding: 0.45rem 0; }
+.prog-row span:last-child { color: var(--w80); }
+.prog-price { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--rose-pale); margin-top: 1.2rem; line-height: 1; }
+.prog-card.adult .prog-price { color: var(--gold-l); }
+.prog-price small { font-family: var(--font-b); font-size: 0.7rem; color: var(--w50); }
+.prog-btn { margin-top: 1.2rem; width: 100%; padding: 0.75rem; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; color: var(--rose-pale); border: 1px solid rgba(196,31,94,0.35); cursor: pointer; font-family: var(--font-b); font-weight: 600; transition: all 0.3s; }
+.prog-btn:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
+.prog-card.adult .prog-btn { color: var(--gold-l); border-color: rgba(200,151,58,0.3); }
+.prog-card.adult .prog-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+/* Signup form */
+.signup-strip { margin-top: 3rem; background: var(--bg3); border: 1px solid var(--border); padding: 2.5rem; }
+.signup-strip h3 { font-family: var(--font-d); font-size: 1.8rem; font-weight: 300; margin-bottom: 1.5rem; }
+.signup-strip h3 em { font-style: italic; color: var(--gold-l); }
+.signup-form { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 1px; }
+.sf-field { display: flex; flex-direction: column; }
+.sf-field label { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--w50); padding: 0.6rem 0.9rem 0.3rem; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.sf-field input, .sf-field select { background: var(--bg2); border: none; border-bottom: 1px solid transparent; color: var(--white); padding: 0.7rem 0.9rem; font-family: var(--font-b); font-size: 0.85rem; outline: none; transition: border-color 0.3s; appearance: none; }
+.sf-field input:focus, .sf-field select:focus { border-bottom-color: var(--rose); }
+.sf-field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C8973A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; background-color: var(--bg2); padding-right: 2rem; }
+.sf-field select option { background: var(--bg2); }
+.signup-submit { padding: 0 2.5rem; background: var(--rose); color: var(--white); border: none; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-b); font-weight: 600; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+.signup-submit:hover { background: var(--rose-h); }
+.signup-consent { font-size: 0.7rem; color: var(--w50); margin-top: 0.8rem; }
+.signup-consent a { color: var(--gold); }
+.signup-success { display: none; text-align: center; padding: 2rem; font-family: var(--font-d); font-size: 1.5rem; color: var(--gold-l); }
+
+/* ── EVENTS PREVIEW ── */
+.events-section { background: var(--bg); padding: 6rem 4rem; border-top: 1px solid var(--border); }
+.events-inner { max-width: 1300px; margin: 0 auto; }
+.events-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+.events-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.events-col-title { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--w50); padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); margin-bottom: 2px; font-weight: 600; }
+.event-row {
+  display: grid; grid-template-columns: 64px 1fr;
+  gap: 1.2rem; align-items: center; background: var(--bg2);
+  padding: 1.2rem 1.5rem; border-left: 2px solid transparent;
+  transition: all 0.25s; margin-bottom: 2px; cursor: pointer;
+}
+.event-row:hover { border-left-color: var(--rose); background: var(--bg3); }
+.event-row.gold-left:hover { border-left-color: var(--gold); }
+.ev-day { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--gold-l); line-height: 1; }
+.ev-month { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--w50); }
+.ev-title { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.2rem; line-height: 1.3; }
+.ev-place { font-size: 0.72rem; color: var(--w50); }
+.ev-type { display: inline-block; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.15rem 0.5rem; margin-bottom: 0.35rem; }
+.ev-type.comp { background: rgba(200,151,58,0.15); color: var(--gold-l); }
+.ev-type.show { background: rgba(196,31,94,0.18); color: #F0A8BB; }
+.ev-type.rent { background: rgba(255,255,255,0.06); color: var(--w50); }
+.events-more { text-align: center; margin-top: 2.5rem; }
+.btn-outline-rose { display: inline-flex; align-items: center; gap: 0.7rem; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.85rem 2rem; background: transparent; color: var(--rose-pale); border: 1px solid rgba(196,31,94,0.4); cursor: pointer; font-family: var(--font-b); font-weight: 600; transition: all 0.3s; }
+.btn-outline-rose:hover { background: var(--rose); border-color: var(--rose); color: var(--white); }
+.btn-outline-rose svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── QUOTE ── */
+.quote-section {
+  background: var(--bg2); padding: 6rem 4rem;
+  border-top: 1px solid var(--border); position: relative; overflow: hidden;
+}
+.quote-crystal {
+  position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
+  opacity: 0.18; pointer-events: none;
+}
+.quote-crystal svg { width: 260px; height: 300px; }
+.quote-inner { max-width: 900px; position: relative; z-index: 1; }
+.quote-mark {
+  font-family: var(--font-d); font-size: 8rem; color: var(--rose); line-height: 0.7;
+  display: block; margin-bottom: 1rem; font-weight: 300;
+}
+.quote-text {
+  font-family: var(--font-d); font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 300; font-style: italic; line-height: 1.45;
+  color: var(--white); margin-bottom: 2rem;
+}
+.quote-text strong { color: var(--gold-l); font-style: normal; font-weight: 400; }
+.quote-author { display: flex; align-items: center; gap: 2rem; }
+.quote-author-line { width: 40px; height: 1px; background: var(--gold); }
+.quote-name { font-family: var(--font-d); font-size: 1.2rem; font-style: italic; color: var(--rose-pale); }
+.quote-title-text { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--w50); }
+
+/* ── ABOUT STRIP ── */
+.about-strip { background: var(--bg3); padding: 5rem 4rem; border-top: 1px solid var(--border); }
+.about-strip-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-text { font-size: 0.88rem; color: var(--w50); line-height: 1.9; font-weight: 300; }
+.about-text p + p { margin-top: 1.2rem; }
+.about-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.about-link-btn { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.7rem 1.4rem; border: 1px solid var(--border); color: var(--gold-l); font-family: var(--font-b); font-weight: 600; transition: all 0.3s; }
+.about-link-btn:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.stat-item { background: var(--bg2); padding: 1.8rem 1.5rem; }
+.stat-num { font-family: var(--font-d); font-size: 2.8rem; font-weight: 300; color: var(--gold-l); line-height: 1; }
+.stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--w50); margin-top: 0.4rem; }
+
+/* ── FOOTER ── */
+footer { background: rgba(10,4,9,1); padding: 4rem 4rem 2rem; border-top: 1px solid var(--border); }
+.footer-top { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1300px; margin: 0 auto 3rem; }
+.footer-brand .nav-logo-text { font-size: 0.85rem; margin-bottom: 1rem; }
+.footer-socials { display: flex; gap: 0.7rem; margin-top: 1.5rem; }
+.footer-social { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+.footer-social:hover { border-color: var(--rose); background: var(--rose); }
+.footer-social svg { width: 16px; height: 16px; fill: var(--w80); }
+.footer-col h4 { font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 600; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul li a { font-size: 0.78rem; color: var(--w50); transition: color 0.3s; }
+.footer-col ul li a:hover { color: var(--gold-l); }
+.footer-col .footer-contact { font-size: 0.78rem; color: var(--w50); line-height: 1.7; }
+.footer-contact a { color: var(--w80); transition: color 0.3s; }
+.footer-contact a:hover { color: var(--gold-l); }
+.footer-bottom { max-width: 1300px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--w04); display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
+.footer-bottom-links { display: flex; gap: 1.5rem; }
+.footer-bottom-links a { font-size: 0.65rem; color: rgba(255,255,255,0.2); transition: color 0.3s; }
+.footer-bottom-links a:hover { color: var(--w50); }
+
+/* ── MOBILE ── */
+.mobile-menu { position: fixed; inset: 0; z-index: 600; background: rgba(19,8,16,0.98); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transform: translateX(100%); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a { font-family: var(--font-d); font-size: 2.2rem; font-weight: 300; color: var(--w80); transition: color 0.3s; letter-spacing: 0.02em; }
+.mobile-menu a:hover { color: var(--gold-l); }
+.mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: var(--w50); font-size: 1.8rem; padding: 0.5rem; line-height: 1; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
+.hero-eyebrow { animation: fadeUp 0.9s ease both 0.3s; }
+.hero-title    { animation: fadeUp 0.9s ease both 0.5s; }
+.hero-sub      { animation: fadeUp 0.9s ease both 0.7s; }
+.hero-actions  { animation: fadeUp 0.9s ease both 0.9s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  nav, section, .medals, .events-section, .quote-section, .about-strip, .programs-section, .features, footer { padding-left: 2rem; padding-right: 2rem; }
+  .hero { padding-left: 2rem; padding-right: 2rem; }
+  .nav-links, .nav-btn { display: none; }
+  .burger { display: flex; }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .feature-item { border-right: none; padding: 0; }
+  .three-cards { grid-template-columns: 1fr; }
+  .medals-grid { grid-template-columns: 1fr; gap: 2px; }
+  .events-two-col { grid-template-columns: 1fr; }
+  .about-strip-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .signup-form { grid-template-columns: 1fr 1fr; }
+  .signup-submit { grid-column: 1 / -1; padding: 1rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  .hero-slide-num { display: none; }
+  .quote-crystal { display: none; }
+}
+@media (max-width: 600px) {
+  .signup-form { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="about.html" onclick="closeMob()">О дворце</a>
+  <a href="#programs" onclick="closeMob()">Занятия</a>
+  <a href="events.html" onclick="closeMob()">Мероприятия</a>
+  <a href="rent.html" onclick="closeMob()">Арендаторам</a>
+  <a href="gallery.html" onclick="closeMob()">Галерея</a>
+  <a href="location.html" onclick="closeMob()">Контакты</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">О дворце</a></li>
+    <li><a href="#programs">Занятия</a></li>
+    <li><a href="events.html">Мероприятия</a></li>
+    <li><a href="rent.html">Арендаторам</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="location.html">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="location.html">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-visual">
+    <!-- Crystal building silhouette -->
+    <svg class="hero-crystal-bg" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;right:0;top:0;bottom:0;width:65%;height:100%">
+      <!-- Main crystal structure -->
+      <polygon points="450,50 820,200 820,550 450,680 80,550 80,200" fill="rgba(60,10,50,0.4)" stroke="rgba(200,151,58,0.3)" stroke-width="1"/>
+      <polygon points="450,120 750,230 750,500 450,610 150,500 150,230" fill="rgba(196,31,94,0.08)" stroke="rgba(196,31,94,0.2)" stroke-width="0.8"/>
+      <!-- Crystal spires -->
+      <polygon points="450,50 550,180 450,200 350,180" fill="rgba(200,151,58,0.15)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+      <polygon points="600,100 680,220 600,240 520,220" fill="rgba(196,31,94,0.12)" stroke="rgba(196,31,94,0.3)" stroke-width="0.8"/>
+      <polygon points="300,90 390,210 300,230 210,210" fill="rgba(200,151,58,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width="0.8"/>
+      <polygon points="700,150 760,250 700,270 640,250" fill="rgba(196,31,94,0.1)" stroke="rgba(196,31,94,0.25)" stroke-width="0.6"/>
+      <!-- Internal facets -->
+      <line x1="450" y1="50" x2="450" y2="200" stroke="rgba(200,151,58,0.25)" stroke-width="0.8"/>
+      <line x1="820" y1="200" x2="750" y2="230" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
+      <line x1="820" y1="550" x2="750" y2="500" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
+      <line x1="450" y1="680" x2="450" y2="610" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
+      <line x1="80" y1="550" x2="150" y2="500" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
+      <line x1="80" y1="200" x2="150" y2="230" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
+      <!-- Cross facets -->
+      <line x1="450" y1="200" x2="750" y2="500" stroke="rgba(196,31,94,0.1)" stroke-width="0.5"/>
+      <line x1="450" y1="200" x2="150" y2="500" stroke="rgba(196,31,94,0.1)" stroke-width="0.5"/>
+      <line x1="450" y1="120" x2="750" y2="230" stroke="rgba(200,151,58,0.12)" stroke-width="0.5"/>
+      <line x1="450" y1="120" x2="150" y2="230" stroke="rgba(200,151,58,0.12)" stroke-width="0.5"/>
+      <!-- Glow effect -->
+      <ellipse cx="450" cy="380" rx="200" ry="180" fill="rgba(196,31,94,0.06)"/>
+      <ellipse cx="600" cy="250" rx="100" ry="80" fill="rgba(200,151,58,0.08)"/>
+    </svg>
+  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Новая Москва · Ватутинки</div>
+    <h1 class="hero-title">
+      ВДОХНОВЛЯЕМ<br>НА ВЕЛИКИЕ<br><span class="accent">ДОСТИЖЕНИЯ</span>
+    </h1>
+    <p class="hero-sub">Дворец спорта и образования Ирины Винер — пространство для развития, побед и гармонии.</p>
+    <div class="hero-actions">
+      <a class="btn-rose" href="#programs">О ДВОРЦЕ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a class="btn-ghost-white" href="events.html">Афиша и мероприятия</a>
+    </div>
+  </div>
+  <div class="hero-slide-num">
+    <span class="hero-slide-active">01</span>
+    <div class="hero-slide-line"></div>
+    <span class="hero-slide-total">05</span>
+  </div>
+  <div class="hero-scroll">ПРОКРУТИТЕ ВНИЗ</div>
+</section>
+
+<!-- FEATURES BAR -->
+<div class="features">
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" fill="rgba(200,151,58,0.1)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="18,8 28,14 28,22 18,28 8,22 8,14" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="18,13 23,16 23,20 18,23 13,20 13,16" fill="rgba(200,151,58,0.2)"/>
+        </svg>
+      </div>
+      <div><div class="feature-label">Уникальная архитектура</div><div class="feature-desc">Кристалл вдохновения и силы</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 36 36" fill="none" stroke="#C8973A" stroke-width="1.2">
+          <path d="M18 4l4 8h8l-6.5 5 2.5 8L18 20l-8 5 2.5-8L6 12h8z"/>
+          <circle cx="18" cy="18" r="2" fill="rgba(200,151,58,0.3)"/>
+        </svg>
+      </div>
+      <div><div class="feature-label">Спортивные достижения</div><div class="feature-desc">Воспитываем чемпионов будущего</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 36 36" fill="none" stroke="#C8973A" stroke-width="1.2">
+          <path d="M18 6c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12S24.6 6 18 6z"/>
+          <path d="M13 18l3 3 7-7"/>
+        </svg>
+      </div>
+      <div><div class="feature-label">Образование и развитие</div><div class="feature-desc">Знания, которые открывают горизонты</div></div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 36 36" fill="none" stroke="#C8973A" stroke-width="1.2">
+          <path d="M18 31s-13-8.5-13-17a13 13 0 0 1 26 0c0 8.5-13 17-13 17z"/>
+          <path d="M18 14v8M14 18h8" stroke-width="1"/>
+        </svg>
+      </div>
+      <div><div class="feature-label">Гармония и эстетика</div><div class="feature-desc">Красота в движении и жизни</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- THREE CARDS -->
+<div class="three-cards">
+  <div class="tcard">
+    <div class="tcard-bg tcard-bg-1"></div>
+    <div class="tcard-overlay"></div>
+    <div class="tcard-content">
+      <div class="tcard-tag">Направления</div>
+      <h2>СПОРТ</h2>
+      <p>Художественная гимнастика, хореография, акробатика и другие направления.</p>
+      <a class="tcard-link" href="#programs">ПОДРОБНЕЕ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="tcard-corner-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+  </div>
+  <div class="tcard">
+    <div class="tcard-bg tcard-bg-2"></div>
+    <div class="tcard-overlay"></div>
+    <div class="tcard-content">
+      <div class="tcard-tag">Инфраструктура</div>
+      <h2>ВОЗМОЖНОСТИ<br>ДВОРЦА</h2>
+      <p>Современные залы, инновационные технологии и комфортная среда.</p>
+      <a class="tcard-link" href="rent.html">ПОДРОБНЕЕ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="tcard-corner-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div>
+  </div>
+  <div class="tcard">
+    <div class="tcard-bg tcard-bg-3"></div>
+    <div class="tcard-overlay"></div>
+    <div class="tcard-content">
+      <div class="tcard-tag">Афиша</div>
+      <h2>СОБЫТИЯ<br>И АФИША</h2>
+      <p>Соревнования, мастер-классы, шоу и образовательные мероприятия.</p>
+      <a class="tcard-link" href="events.html">ПОДРОБНЕЕ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="tcard-corner-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+  </div>
+</div>
+
+<!-- MEDALS -->
+<div class="medals" id="medals">
+  <div class="medals-inner">
+    <div class="medals-header reveal">
+      <div class="medals-eyebrow">Наши достижения</div>
+      <h2 class="medals-title">Медальница <em>дворца</em></h2>
+    </div>
+    <div class="medals-grid">
+      <div class="medal-card mc-gold reveal reveal-d1">
+        <div class="medal-gem"><svg viewBox="0 0 70 70" fill="none"><polygon points="35,3 67,18 67,52 35,67 3,52 3,18" fill="rgba(232,201,122,0.1)" stroke="#E8C97A" stroke-width="1"/><polygon points="35,11 57,22 57,48 35,59 13,48 13,22" fill="rgba(232,201,122,0.07)" stroke="#E8C97A" stroke-width="0.5"/><polygon points="35,20 49,27 49,43 35,50 21,43 21,27" fill="rgba(232,201,122,0.15)"/><line x1="35" y1="3" x2="35" y2="20" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/><line x1="67" y1="18" x2="49" y2="27" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/><line x1="67" y1="52" x2="49" y2="43" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/><line x1="35" y1="67" x2="35" y2="50" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/><line x1="3" y1="52" x2="21" y2="43" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/><line x1="3" y1="18" x2="21" y2="27" stroke="#E8C97A" stroke-width="0.6" opacity="0.6"/></svg></div>
+        <span class="medal-count" data-target="248">0</span>
+        <div class="medal-label">Золотые медали</div>
+        <div class="medal-desc">чемпионаты мира, Европы, России</div>
+      </div>
+      <div class="medal-card mc-silver reveal reveal-d2">
+        <div class="medal-gem"><svg viewBox="0 0 70 70" fill="none"><polygon points="35,3 67,18 67,52 35,67 3,52 3,18" fill="rgba(200,212,220,0.08)" stroke="#C8D4DC" stroke-width="1"/><polygon points="35,11 57,22 57,48 35,59 13,48 13,22" fill="rgba(200,212,220,0.06)" stroke="#C8D4DC" stroke-width="0.5"/><polygon points="35,20 49,27 49,43 35,50 21,43 21,27" fill="rgba(200,212,220,0.12)"/><line x1="35" y1="3" x2="35" y2="20" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/><line x1="67" y1="18" x2="49" y2="27" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/><line x1="67" y1="52" x2="49" y2="43" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/><line x1="35" y1="67" x2="35" y2="50" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/><line x1="3" y1="52" x2="21" y2="43" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/><line x1="3" y1="18" x2="21" y2="27" stroke="#C8D4DC" stroke-width="0.6" opacity="0.5"/></svg></div>
+        <span class="medal-count" data-target="189">0</span>
+        <div class="medal-label">Серебряные медали</div>
+        <div class="medal-desc">соревнования всех уровней</div>
+      </div>
+      <div class="medal-card mc-bronze reveal reveal-d3">
+        <div class="medal-gem"><svg viewBox="0 0 70 70" fill="none"><polygon points="35,3 67,18 67,52 35,67 3,52 3,18" fill="rgba(205,140,82,0.08)" stroke="#CD8C52" stroke-width="1"/><polygon points="35,11 57,22 57,48 35,59 13,48 13,22" fill="rgba(205,140,82,0.06)" stroke="#CD8C52" stroke-width="0.5"/><polygon points="35,20 49,27 49,43 35,50 21,43 21,27" fill="rgba(205,140,82,0.15)"/><line x1="35" y1="3" x2="35" y2="20" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/><line x1="67" y1="18" x2="49" y2="27" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/><line x1="67" y1="52" x2="49" y2="43" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/><line x1="35" y1="67" x2="35" y2="50" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/><line x1="3" y1="52" x2="21" y2="43" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/><line x1="3" y1="18" x2="21" y2="27" stroke="#CD8C52" stroke-width="0.6" opacity="0.5"/></svg></div>
+        <span class="medal-count" data-target="143">0</span>
+        <div class="medal-label">Бронзовые медали</div>
+        <div class="medal-desc">соревнования всех уровней</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="programs-section" id="programs">
+  <div class="programs-inner">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Занятия</div>
+      <h2 class="section-title">Программы для <em>детей</em><br>и <span class="rose">взрослых</span></h2>
+    </div>
+    <div class="prog-tabs reveal">
+      <button class="p-tab active" onclick="filterP('all',this)">Все</button>
+      <button class="p-tab" onclick="filterP('kids',this)">3–7 лет</button>
+      <button class="p-tab" onclick="filterP('sport',this)">8+ лет</button>
+      <button class="p-tab" onclick="filterP('extra',this)">Доп. занятия</button>
+      <button class="p-tab" onclick="filterP('adult',this)">Взрослым</button>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card vis" data-cat="kids"><span class="prog-tag">3–5 лет</span><h3>Спортивно-оздоровительные группы</h3><div class="prog-rows"><div class="prog-row"><span>Уровень 1 (3–4 г.)</span><span>3×/нед · 1 ч</span></div><div class="prog-row"><span>Уровень 1+ (4–5 л.)</span><span>3×/нед · 1.5 ч</span></div></div><div class="prog-price">15–16 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Уровень 1 / 1+')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="kids"><span class="prog-tag">6–7 лет</span><h3>Группы начальной подготовки</h3><div class="prog-rows"><div class="prog-row"><span>Уровень 2 (6 лет)</span><span>3×/нед · 2 ч</span></div><div class="prog-row"><span>Уровень 2+ (7 лет)</span><span>4×/нед · 2 ч</span></div></div><div class="prog-price">17–20 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Начальная подготовка')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="kids"><span class="prog-tag">5–7 лет</span><h3>Группы 2019–2020 г.р.</h3><div class="prog-rows"><div class="prog-row"><span>Возраст</span><span>5–7 лет</span></div><div class="prog-row"><span>Частота</span><span>4×/нед · 2 ч</span></div></div><div class="prog-price">20 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Группа 2019-2020')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="sport"><span class="prog-tag">8–11 лет</span><h3>Спортивная специализация</h3><div class="prog-rows"><div class="prog-row"><span>Уровень 3 (8 л.)</span><span>4×/нед · 3 ч</span></div><div class="prog-row"><span>Уровень 3+ (9 л.)</span><span>5×/нед · 3 ч</span></div><div class="prog-row"><span>Уровень 4 (10–11 л.)</span><span>5×/нед · 4 ч</span></div></div><div class="prog-price">25–28 500<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Спортивная специализация')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="sport"><span class="prog-tag">от 12 лет</span><h3>Совершенствование мастерства</h3><div class="prog-rows"><div class="prog-row"><span>Уровень 4+ (12 л.)</span><span>6×/нед · 4 ч</span></div><div class="prog-row"><span>Уровень 5 (13+)</span><span>6×/нед · 5 ч</span></div></div><div class="prog-price">31–32 500<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Совершенствование мастерства')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="extra"><span class="prog-tag">от 6 лет</span><h3>ОФП</h3><div class="prog-rows"><div class="prog-row"><span>Частота</span><span>3×/нед · 2 ч</span></div></div><div class="prog-price">16 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('ОФП')">Записаться</button></div>
+      <div class="prog-card vis" data-cat="extra"><span class="prog-tag">от 6 лет</span><h3>Хореография</h3><div class="prog-rows"><div class="prog-row"><span>Частота</span><span>3×/нед · 2 ч</span></div></div><div class="prog-price">16 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Хореография')">Записаться</button></div>
+      <div class="prog-card adult vis" data-cat="adult"><span class="prog-tag">18+</span><h3>Стретчинг и гибкость</h3><div class="prog-rows"><div class="prog-row"><span>Частота</span><span>2–3×/нед · 1 ч</span></div><div class="prog-row"><span>Формат</span><span>Малые группы</span></div></div><div class="prog-price">от 8 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Стретчинг для взрослых')">Записаться</button></div>
+      <div class="prog-card adult vis" data-cat="adult"><span class="prog-tag">18+</span><h3>Гимнастика для взрослых</h3><div class="prog-rows"><div class="prog-row"><span>Частота</span><span>2×/нед · 1.5 ч</span></div><div class="prog-row"><span>Формат</span><span>Малые группы</span></div></div><div class="prog-price">от 10 000<small> ₽/мес</small></div><button class="prog-btn" onclick="setGroup('Гимнастика для взрослых')">Записаться</button></div>
+    </div>
+    <!-- SIGNUP FORM -->
+    <div class="signup-strip reveal" id="signupStrip">
+      <h3>Запись на <em>пробное занятие</em></h3>
+      <div id="signupForm">
+        <div class="signup-form">
+          <div class="sf-field"><label>Имя</label><input type="text" placeholder="Анна" required></div>
+          <div class="sf-field"><label>Телефон</label><input type="tel" placeholder="+7 (___) ___-__-__" required></div>
+          <div class="sf-field"><label>Группа</label>
+            <select id="groupSel">
+              <option value="">Выберите группу</option>
+              <option>Уровень 1 / 1+</option><option>Начальная подготовка</option>
+              <option>Группа 2019-2020</option><option>Спортивная специализация</option>
+              <option>Совершенствование мастерства</option><option>ОФП</option>
+              <option>Хореография</option><option>Стретчинг для взрослых</option>
+              <option>Гимнастика для взрослых</option>
+            </select>
+          </div>
+          <div class="sf-field"><label>Возраст ребёнка</label>
+            <select><option>Выберите возраст</option><option>3–4 года</option><option>5–6 лет</option><option>7–8 лет</option><option>9–11 лет</option><option>12+ лет</option><option>Взрослый 18+</option></select>
+          </div>
+          <button class="signup-submit" onclick="submitSignup(event)">ЗАПИСАТЬСЯ →</button>
+        </div>
+        <p class="signup-consent">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+      </div>
+      <div class="signup-success" id="signupSuccess">✦ Заявка принята! Свяжемся с вами в течение рабочего дня.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS PREVIEW -->
+<section class="events-section" id="events">
+  <div class="events-inner">
+    <div class="events-top reveal">
+      <div>
+        <div class="section-eyebrow">Мероприятия</div>
+        <h2 class="section-title">Афиша и <em>события</em></h2>
+      </div>
+      <a class="btn-outline-rose" href="events.html">ВСЕ МЕРОПРИЯТИЯ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="events-two-col reveal">
+      <div>
+        <div class="events-col-title">Наши мероприятия</div>
+        <div class="event-row">
+          <div><div class="ev-day">14</div><div class="ev-month">ИЮНЯ</div></div>
+          <div><div class="ev-type comp">Соревнование</div><div class="ev-title">Открытый Кубок Дворца Ирины Винер</div><div class="ev-place">📍 Главный зал · Ватутинки</div></div>
+        </div>
+        <div class="event-row">
+          <div><div class="ev-day">22</div><div class="ev-month">ИЮНЯ</div></div>
+          <div><div class="ev-type show">Показательное</div><div class="ev-title">Летний гала-концерт воспитанников</div><div class="ev-place">📍 Главный зал · Ватутинки</div></div>
+        </div>
+        <div class="event-row">
+          <div><div class="ev-day">9</div><div class="ev-month">НОЯБРЯ</div></div>
+          <div><div class="ev-type comp">Соревнование</div><div class="ev-title">Гран-при Ирины Винер</div><div class="ev-place">📍 Главный зал · Ватутинки</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="events-col-title">Соревнования арендаторов</div>
+        <div class="event-row gold-left">
+          <div><div class="ev-day">5</div><div class="ev-month">ИЮЛЯ</div></div>
+          <div><div class="ev-type rent">Аренда</div><div class="ev-title">Чемпионат МО среди юниоров</div><div class="ev-place">📍 Крокус Арена, Москва</div></div>
+        </div>
+        <div class="event-row gold-left">
+          <div><div class="ev-day">19</div><div class="ev-month">ИЮЛЯ</div></div>
+          <div><div class="ev-type rent">Аренда</div><div class="ev-title">Первенство ЦФО по акробатике</div><div class="ev-place">📍 Главный зал · Ватутинки</div></div>
+        </div>
+        <div class="event-row gold-left">
+          <div><div class="ev-day">2</div><div class="ev-month">АВГА</div></div>
+          <div><div class="ev-type rent">Аренда</div><div class="ev-title">Летние сборы по художественной гимнастике</div><div class="ev-place">📍 Главный зал · Ватутинки</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="events-more reveal">
+      <a class="btn-outline-rose" href="events.html">СМОТРЕТЬ ВСЕ МЕРОПРИЯТИЯ <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-crystal">
+    <svg viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="130,5 255,65 255,235 130,295 5,235 5,65" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.5)" stroke-width="1"/>
+      <polygon points="130,28 228,80 228,220 130,272 32,220 32,80" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.25)" stroke-width="0.6"/>
+      <polygon points="130,58 200,98 200,202 130,242 60,202 60,98" fill="rgba(196,31,94,0.06)"/>
+      <line x1="130" y1="5" x2="130" y2="58" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="255" y1="65" x2="200" y2="98" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="255" y1="235" x2="200" y2="202" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="130" y1="295" x2="130" y2="242" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="5" y1="235" x2="60" y2="202" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="5" y1="65" x2="60" y2="98" stroke="rgba(200,151,58,0.4)" stroke-width="0.7"/>
+      <line x1="130" y1="58" x2="200" y2="202" stroke="rgba(196,31,94,0.15)" stroke-width="0.5"/>
+      <line x1="130" y1="58" x2="60" y2="202" stroke="rgba(196,31,94,0.15)" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="quote-inner reveal">
+    <span class="quote-mark">❝</span>
+    <p class="quote-text">Моя цель — не только победы на ковре,<br>но и <strong>сильная, образованная,<br>гармоничная личность.</strong></p>
+    <div class="quote-author">
+      <div class="quote-author-line"></div>
+      <div>
+        <div class="quote-name">Ирина Винер</div>
+        <div class="quote-title-text">Президент Всероссийской федерации художественной гимнастики</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip">
+  <div class="about-strip-inner">
+    <div>
+      <div class="section-eyebrow reveal">О дворце</div>
+      <h2 class="section-title reveal">Традиции <em>побед</em></h2>
+      <div class="about-text reveal" style="margin-top:1.5rem">
+        <p>Дворец спорта и образования Ирины Винер — уникальный комплекс в Ватутинках, созданный по стандартам Международной Федерации гимнастики.</p>
+        <p>Здание в форме кристалла с 18-метровыми потолками и прозрачной крышей вдохновляет на достижения. Здесь тренируются будущие чемпионы под руководством олимпийских призёров.</p>
+      </div>
+      <div class="about-links reveal">
+        <a class="about-link-btn" href="about.html">О дворце →</a>
+        <a class="about-link-btn" href="about.html#team">Коллектив →</a>
+        <a class="about-link-btn" href="location.html">Расположение →</a>
+        <a class="about-link-btn" href="location.html#contacts">Контакты →</a>
+      </div>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-item"><div class="stat-num">18м</div><div class="stat-label">Высота потолков</div></div>
+      <div class="stat-item"><div class="stat-num">FIG</div><div class="stat-label">Стандарт федерации</div></div>
+      <div class="stat-item"><div class="stat-num">580+</div><div class="stat-label">Медалей завоёвано</div></div>
+      <div class="stat-item"><div class="stat-num">3–18</div><div class="stat-label">Возраст учеников</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="margin-bottom:1rem;display:flex">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:0.7rem"><polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/><polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/><polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/></svg>
+        <span class="nav-logo-text" style="font-size:0.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <ul>
+        <li><a href="about.html">О дворце</a></li>
+        <li><a href="about.html#team">Коллектив</a></li>
+        <li><a href="events.html">Мероприятия</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+        <li><a href="rent.html">Арендаторам</a></li>
+        <li><a href="location.html">Контакты</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Направления</h4>
+      <ul>
+        <li><a href="#programs">Художественная гимнастика</a></li>
+        <li><a href="#programs">Хореография</a></li>
+        <li><a href="#programs">ОФП</a></li>
+        <li><a href="#programs">Стретчинг для взрослых</a></li>
+        <li><a href="#programs">Гимнастика для взрослых</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <div class="footer-contact">
+        г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br>
+        <a href="tel:+78007005174">8 (800) 700-51-74</a><br>
+        <a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a><br><br>
+        <a class="about-link-btn" href="location.html" style="display:inline-block;margin-top:0.5rem;font-size:0.6rem;padding:0.5rem 1rem">КАК ДОБРАТЬСЯ →</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links">
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Пользовательское соглашение</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 80), {passive:true});
+
+// MOBILE
+function openMob() { document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// PROGRAMS FILTER
+function filterP(cat, btn) {
+  document.querySelectorAll('.p-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prog-card').forEach(c => c.classList.toggle('vis', cat === 'all' || c.dataset.cat === cat));
+}
+
+// SET GROUP IN FORM
+function setGroup(g) {
+  document.getElementById('groupSel').value = g;
+  document.getElementById('signupStrip').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// SUBMIT
+function submitSignup(e) {
+  e.preventDefault();
+  document.getElementById('signupForm').style.display = 'none';
+  document.getElementById('signupSuccess').style.display = 'block';
+}
+
+// MEDAL COUNTER
+let medalDone = false;
+const medalObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !medalDone) {
+    medalDone = true;
+    document.querySelectorAll('.medal-count').forEach(el => {
+      const target = +el.dataset.target, dur = 2000, step = 16;
+      const inc = target / (dur / step);
+      let cur = 0;
+      const t = setInterval(() => {
+        cur = Math.min(cur + inc, target);
+        el.textContent = Math.round(cur);
+        if (cur >= target) clearInterval(t);
+      }, step);
+    });
+  }
+}, {threshold: 0.4});
+medalObs.observe(document.getElementById('medals'));
+
+// REVEAL
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+</script>
+</body>
+</html>

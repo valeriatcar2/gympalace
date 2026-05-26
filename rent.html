@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Арендаторам — Дворец Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#130810;--bg2:#1E0D1A;--bg3:#2A1225;
+  --rose:#C41F5E;--rose-h:#E0256E;--rose-p:#F5D0DF;
+  --gold:#C8973A;--gold-l:#E8C97A;
+  --white:#FFFFFF;
+  --w80:rgba(255,255,255,.8);--w60:rgba(255,255,255,.6);
+  --w50:rgba(255,255,255,.5);--w20:rgba(255,255,255,.2);
+  --w08:rgba(255,255,255,.08);--w04:rgba(255,255,255,.04);
+  --border:rgba(200,151,58,.2);
+  --font-d:'Cormorant Garamond',serif;--font-b:'Raleway',sans-serif;
+  --cal-avail:rgba(200,151,58,.15);
+  --cal-avail-h:rgba(200,151,58,.35);
+  --cal-busy:rgba(196,31,94,.12);
+  --cal-sel:rgba(200,151,58,.5);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--white);font-size:15px;line-height:1.7;font-weight:400;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(19,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.9rem}
+.nav-logo-gem{width:32px;height:37px;flex-shrink:0}
+.nav-logo-text{font-family:var(--font-d);font-size:.78rem;font-weight:600;letter-spacing:.08em;line-height:1.35;color:var(--white);text-transform:uppercase}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w80);transition:color .3s;font-weight:500}
+.nav-links a:hover{color:var(--gold-l)}
+.nav-links a.active{color:var(--gold-l);border-bottom:1px solid var(--gold);padding-bottom:2px}
+.nav-btn{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;padding:.65rem 1.6rem;border:1px solid var(--rose);color:var(--white);background:transparent;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s}
+.nav-btn:hover{background:var(--rose)}
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:24px;height:1.5px;background:var(--white)}
+
+/* PAGE HERO */
+.page-hero{position:relative;min-height:58vh;display:flex;align-items:flex-end;padding:0 4rem 5rem;overflow:hidden;background:var(--bg)}
+.hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 100% at 75% 40%,rgba(196,31,94,.13),transparent 55%),radial-gradient(ellipse 50% 80% at 5% 80%,rgba(200,151,58,.08),transparent 50%),linear-gradient(to top,rgba(19,8,16,.9) 0%,transparent 60%)}
+.hero-crystal{position:absolute;right:0;top:0;bottom:0;width:50%;display:flex;align-items:center;justify-content:flex-end;padding-right:3rem;opacity:.18;pointer-events:none}
+.hero-crystal svg{width:340px;height:400px}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-title{font-family:var(--font-d);font-size:clamp(3.2rem,8vw,6.5rem);font-weight:300;line-height:.9;letter-spacing:-.02em}
+.hero-title em{font-style:italic;color:var(--gold-l);display:block}
+.hero-sub{font-size:.9rem;color:var(--w50);margin-top:1.4rem;max-width:460px;line-height:1.9;font-weight:300}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero-eyebrow{animation:fadeUp .8s ease both .2s}
+.hero-title{animation:fadeUp .8s ease both .38s}
+.hero-sub{animation:fadeUp .8s ease both .54s}
+
+/* COMMONS */
+.sec{padding:6rem 4rem}
+.sec-inner{max-width:1300px;margin:0 auto}
+.sec-eyebrow{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3.6rem);font-weight:300;line-height:1.05}
+.sec-title em{font-style:italic;color:var(--gold-l)}
+
+/* ADVANTAGES */
+.adv-section{background:var(--bg2);border-bottom:1px solid var(--border)}
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
+.adv-card{background:var(--bg3);padding:2.5rem 2rem;border-top:2px solid transparent;transition:border-color .3s}
+.adv-card:hover{border-top-color:var(--gold)}
+.adv-icon{width:48px;height:48px;margin-bottom:1.5rem}
+.adv-icon svg{width:48px;height:48px;stroke:var(--gold);fill:none;stroke-width:1.2}
+.adv-card h3{font-family:var(--font-d);font-size:1.3rem;font-weight:400;margin-bottom:.7rem}
+.adv-card p{font-size:.82rem;color:var(--w50);line-height:1.75;font-weight:300}
+.adv-num{font-family:var(--font-d);font-size:2.5rem;font-weight:300;color:rgba(200,151,58,.2);line-height:1;margin-bottom:.5rem}
+
+/* HALLS */
+.halls-section{background:var(--bg);border-bottom:1px solid var(--border)}
+.halls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
+.hall-card{background:var(--bg2);overflow:hidden;border-top:2px solid transparent;transition:border-color .3s;cursor:pointer}
+.hall-card:hover{border-top-color:var(--rose)}
+.hall-card.selected{border-top-color:var(--gold)}
+.hall-visual{width:100%;padding-bottom:55%;position:relative;overflow:hidden;background:var(--bg3)}
+.hall-visual-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.hall-visual-inner svg{width:80%;height:80%;opacity:.35}
+.hall-info{padding:1.8rem}
+.hall-tag{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .6rem;background:rgba(200,151,58,.12);color:var(--gold-l);display:inline-block;margin-bottom:.8rem}
+.hall-card.selected .hall-tag{background:rgba(200,151,58,.25)}
+.hall-card h3{font-family:var(--font-d);font-size:1.2rem;font-weight:400;margin-bottom:.6rem}
+.hall-specs{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.hall-spec{display:flex;justify-content:space-between;font-size:.75rem;color:var(--w50);border-bottom:1px solid var(--w04);padding-bottom:.4rem}
+.hall-spec span:last-child{color:var(--w80)}
+.hall-price{font-family:var(--font-d);font-size:1.8rem;font-weight:300;color:var(--gold-l)}
+.hall-price small{font-family:var(--font-b);font-size:.7rem;color:var(--w50)}
+.hall-select-btn{width:100%;margin-top:1rem;padding:.7rem;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--gold-l);border:1px solid var(--border);cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s}
+.hall-select-btn:hover,.hall-card.selected .hall-select-btn{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+
+/* CALENDAR SECTION */
+.calendar-section{background:var(--bg3);border-bottom:1px solid var(--border)}
+.calendar-layout{display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;margin-top:3rem}
+
+/* Event type picker */
+.event-type-picker{display:flex;gap:2px;margin-bottom:2rem}
+.etype-btn{flex:1;padding:1rem;text-align:center;cursor:pointer;background:var(--bg2);border:1px solid var(--border);border-left:none;transition:all .3s;font-family:var(--font-b)}
+.etype-btn:first-child{border-left:1px solid var(--border)}
+.etype-btn.active{background:var(--rose);border-color:var(--rose)}
+.etype-btn:hover:not(.active){border-color:var(--rose);color:var(--rose-p)}
+.etype-icon{font-size:1.4rem;display:block;margin-bottom:.4rem}
+.etype-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;display:block}
+.etype-desc{font-size:.68rem;color:var(--w50);margin-top:.2rem;display:block}
+.etype-btn.active .etype-desc{color:rgba(255,255,255,.7)}
+
+/* Calendar */
+.calendar-wrap{background:var(--bg2);border:1px solid var(--border)}
+.cal-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
+.cal-nav-btn{background:none;border:1px solid var(--border);color:var(--w80);width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-family:var(--font-b)}
+.cal-nav-btn:hover{border-color:var(--gold);color:var(--gold-l)}
+.cal-month-label{font-family:var(--font-d);font-size:1.3rem;font-weight:300;color:var(--gold-l)}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);padding:.8rem 1rem .5rem}
+.cal-wd{text-align:center;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--w50);font-weight:600}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:.5rem 1rem 1rem}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.82rem;cursor:pointer;position:relative;transition:all .2s;border:1px solid transparent}
+.cal-day.empty{cursor:default}
+.cal-day.past{color:rgba(255,255,255,.15);cursor:not-allowed}
+.cal-day.available{background:var(--cal-avail);color:var(--gold-l);font-weight:600}
+.cal-day.available:hover{background:var(--cal-avail-h);border-color:var(--gold)}
+.cal-day.busy{background:var(--cal-busy);color:rgba(196,31,94,.6);cursor:not-allowed;text-decoration:line-through}
+.cal-day.selected{background:var(--gold)!important;color:var(--bg)!important;border-color:var(--gold-l)!important;font-weight:700}
+.cal-day.today{border-color:rgba(196,31,94,.5)}
+.cal-legend{display:flex;gap:1.2rem;padding:.8rem 1.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.cal-leg-item{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--w50)}
+.cal-leg-dot{width:10px;height:10px;flex-shrink:0}
+.cal-leg-dot.avail{background:var(--cal-avail);border:1px solid rgba(200,151,58,.4)}
+.cal-leg-dot.busy{background:var(--cal-busy)}
+.cal-leg-dot.sel{background:var(--gold)}
+
+/* Sidebar form */
+.booking-sidebar{background:var(--bg2);border:1px solid var(--border);padding:2rem;position:sticky;top:80px}
+.sidebar-title{font-family:var(--font-d);font-size:1.4rem;font-weight:300;margin-bottom:.3rem}
+.sidebar-sub{font-size:.75rem;color:var(--w50);margin-bottom:1.5rem}
+.selected-date-display{padding:1rem;background:var(--bg3);border-left:2px solid var(--gold);margin-bottom:1.5rem;min-height:52px;display:flex;align-items:center}
+.selected-date-display.empty{border-left-color:var(--border)}
+.sdd-text{font-family:var(--font-d);font-size:1.1rem;color:var(--gold-l)}
+.sdd-hint{font-size:.72rem;color:var(--w50)}
+.booking-form{display:flex;flex-direction:column;gap:.9rem}
+.bf-field{display:flex;flex-direction:column}
+.bf-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--w50);margin-bottom:.35rem}
+.bf-input{background:var(--bg3);border:1px solid var(--border);color:var(--white);padding:.8rem 1rem;font-family:var(--font-b);font-size:.85rem;outline:none;transition:border-color .3s;appearance:none}
+.bf-input:focus{border-color:var(--gold)}
+.bf-select{background:var(--bg3);border:1px solid var(--border);color:var(--white);padding:.8rem 1rem;font-family:var(--font-b);font-size:.85rem;outline:none;transition:border-color .3s;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C8973A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-color:var(--bg3);padding-right:2.5rem}
+.bf-select:focus{border-color:var(--gold)}
+.bf-select option{background:var(--bg2)}
+.booking-submit{padding:1rem;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:var(--font-b);font-weight:700;transition:all .3s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.booking-submit:hover{background:var(--rose-h)}
+.booking-consent{font-size:.65rem;color:var(--w50);line-height:1.5}
+.booking-consent a{color:var(--gold)}
+.booking-success{display:none;text-align:center;padding:2rem 1rem}
+.booking-success-icon{font-size:2rem;margin-bottom:.8rem}
+.booking-success h3{font-family:var(--font-d);font-size:1.6rem;color:var(--gold-l);margin-bottom:.4rem}
+.booking-success p{font-size:.78rem;color:var(--w50);line-height:1.6}
+
+/* PRICE TABLE */
+.price-section{background:var(--bg2);border-bottom:1px solid var(--border)}
+.price-table{width:100%;border-collapse:collapse;margin-top:2.5rem}
+.price-table th{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:1rem 1.5rem;border-bottom:1px solid var(--border);text-align:left;font-weight:600;background:var(--bg3)}
+.price-table td{padding:1rem 1.5rem;border-bottom:1px solid var(--w04);font-size:.82rem;color:var(--w80);vertical-align:middle}
+.price-table tr:hover td{background:var(--w04)}
+.price-table .price-val{font-family:var(--font-d);font-size:1.3rem;font-weight:300;color:var(--gold-l)}
+.price-table .price-note{font-size:.68rem;color:var(--w50);margin-top:.2rem}
+.price-badge{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .55rem;display:inline-block;margin-left:.5rem}
+.price-badge.pop{background:rgba(196,31,94,.2);color:#F0A8BB}
+
+/* CTA */
+.cta-band{background:var(--bg2);padding:5rem 4rem;text-align:center;border-top:1px solid var(--border);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(196,31,94,.1),transparent 60%);pointer-events:none}
+.cta-inner{position:relative;z-index:1}
+.cta-inner h2{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:.8rem}
+.cta-inner h2 em{font-style:italic;color:var(--gold-l)}
+.cta-inner p{font-size:.88rem;color:var(--w50);margin-bottom:2rem;font-weight:300}
+.btn-rose{display:inline-flex;align-items:center;gap:.8rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:1rem 2.2rem;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn-rose:hover{background:var(--rose-h)}
+.btn-rose svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* FOOTER */
+footer{background:rgba(10,4,9,1);padding:4rem 4rem 2rem;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:3rem;max-width:1300px;margin:0 auto 3rem}
+.footer-socials{display:flex;gap:.7rem;margin-top:1.5rem}
+.footer-social{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.footer-social:hover{border-color:var(--rose);background:var(--rose)}
+.footer-social svg{width:16px;height:16px;fill:var(--w80)}
+.footer-col h4{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{font-size:.78rem;color:var(--w50);transition:color .3s}
+.footer-col ul li a:hover{color:var(--gold-l)}
+.footer-contact{font-size:.78rem;color:var(--w50);line-height:1.7}
+.footer-contact a{color:var(--w80);transition:color .3s}
+.footer-contact a:hover{color:var(--gold-l)}
+.footer-contact-btn{display:inline-block;margin-top:.5rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);color:var(--gold-l);font-family:var(--font-b);font-weight:600;transition:all .3s}
+.footer-contact-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.footer-bottom{max-width:1300px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--w04);display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.2)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:.65rem;color:rgba(255,255,255,.2);transition:color .3s}
+.footer-bottom-links a:hover{color:var(--w50)}
+
+/* mobile */
+.mobile-menu{position:fixed;inset:0;z-index:600;background:rgba(19,8,16,.98);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:var(--font-d);font-size:2.2rem;font-weight:300;color:var(--w80);transition:color .3s}
+.mobile-menu a:hover{color:var(--gold-l)}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:var(--w50);font-size:1.8rem;padding:.5rem;line-height:1}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+
+@media(max-width:1100px){
+  .calendar-layout{grid-template-columns:1fr}
+  .booking-sidebar{position:static}
+  nav,.page-hero,.sec,.cta-band,footer{padding-left:2rem;padding-right:2rem}
+  .nav-links,.nav-btn{display:none}
+  .burger{display:flex}
+  .adv-grid,.halls-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .hero-crystal{display:none}
+  .event-type-picker{flex-wrap:wrap}
+  .price-table{font-size:.78rem}
+}
+@media(max-width:640px){
+  .adv-grid,.halls-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .price-table th,.price-table td{padding:.7rem .8rem}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="index.html">Главная</a>
+  <a href="about.html">О дворце</a>
+  <a href="index.html#programs">Занятия</a>
+  <a href="events.html">Мероприятия</a>
+  <a href="rent.html">Арендаторам</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="location.html">Контакты</a>
+</div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">О дворце</a></li>
+    <li><a href="index.html#programs">Занятия</a></li>
+    <li><a href="events.html">Мероприятия</a></li>
+    <li><a href="rent.html" class="active">Арендаторам</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="location.html">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="location.html">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-crystal">
+    <svg viewBox="0 0 340 400" fill="none">
+      <polygon points="170,5 330,80 330,320 170,395 10,320 10,80" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+      <polygon points="170,30 295,95 295,305 170,370 45,305 45,95" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.18)" stroke-width=".6"/>
+      <polygon points="170,65 250,110 250,290 170,335 90,290 90,110" fill="rgba(196,31,94,0.06)"/>
+      <polygon points="170,5 250,110 170,65" fill="rgba(200,151,58,0.07)" stroke="rgba(200,151,58,0.28)" stroke-width=".5"/>
+      <polygon points="330,80 250,110 170,65" fill="rgba(196,31,94,0.05)"/>
+      <line x1="170" y1="5" x2="170" y2="65" stroke="rgba(200,151,58,0.45)" stroke-width=".8"/>
+      <line x1="330" y1="80" x2="250" y2="110" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="330" y1="320" x2="250" y2="290" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="170" y1="395" x2="170" y2="335" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="10" y1="320" x2="90" y2="290" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="10" y1="80" x2="90" y2="110" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Дворец Ирины Винер</div>
+    <h1 class="hero-title">АРЕНДА<br><em>ЗАЛОВ</em></h1>
+    <p class="hero-sub">Современная инфраструктура мирового уровня для тренировок, учебно-тренировочных сборов и соревнований любого масштаба.</p>
+  </div>
+</div>
+
+<!-- ADVANTAGES -->
+<section class="sec adv-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow reveal">Преимущества</div>
+    <h2 class="sec-title reveal">Почему выбирают <em>нас</em></h2>
+    <div class="adv-grid">
+      <div class="adv-card reveal rd1">
+        <div class="adv-num">01</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><polygon points="24,3 45,13 45,35 24,45 3,35 3,13" stroke-width="1.2"/><polygon points="24,10 38,18 38,30 24,38 10,30 10,18" stroke-width=".7" opacity=".5"/><line x1="24" y1="3" x2="24" y2="10"/><line x1="45" y1="13" x2="38" y2="18"/></svg></div>
+        <h3>Стандарт FIG</h3>
+        <p>Зал соответствует требованиям Международной Федерации гимнастики. Профессиональное покрытие, разметка, освещение 1500 люкс.</p>
+      </div>
+      <div class="adv-card reveal rd2">
+        <div class="adv-num">02</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z"/><path d="M24 12v12l8 4"/></svg></div>
+        <h3>18 метров высота</h3>
+        <p>Уникальный зал с потолками 18 метров позволяет проводить соревнования по акробатике, прыжкам на батуте и художественной гимнастике.</p>
+      </div>
+      <div class="adv-card reveal rd3">
+        <div class="adv-num">03</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><path d="M4 18h40"/><path d="M14 8v10M34 8v10"/></svg></div>
+        <h3>Гибкое расписание</h3>
+        <p>Аренда от одного часа до нескольких недель. Возможность бронирования на выходные дни, праздники и официальные соревнования.</p>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-num">04</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><path d="M24 4l5 10h11l-9 7 3 11-10-7-10 7 3-11-9-7h11z"/></svg></div>
+        <h3>Престижная площадка</h3>
+        <p>Соревнования в Дворце Ирины Винер — это статус. Известное имя, медийность и уникальная архитектура здания-кристалла.</p>
+      </div>
+      <div class="adv-card reveal rd1">
+        <div class="adv-num">05</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><path d="M4 40V20L24 8l20 12v20"/><path d="M16 40V28h16v12"/><path d="M24 8v8"/></svg></div>
+        <h3>Полная инфраструктура</h3>
+        <p>Трибуны для зрителей, раздевалки с душевыми, зоны разминки, парковка, кафе. Всё необходимое для соревнований любого масштаба.</p>
+      </div>
+      <div class="adv-card reveal rd2">
+        <div class="adv-num">06</div>
+        <div class="adv-icon"><svg viewBox="0 0 48 48"><path d="M4 20h40M4 28h40M12 4v40M36 4v40"/><rect x="4" y="4" width="40" height="40" rx="2"/></svg></div>
+        <h3>Зал-трансформер</h3>
+        <p>Академия единоборств трансформируется под мини-футбол, волейбол, баскетбол и другие виды спорта. Универсальное пространство.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HALLS -->
+<section class="sec halls-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow reveal">Залы</div>
+    <h2 class="sec-title reveal">Выберите <em>пространство</em></h2>
+    <div class="halls-grid">
+      <div class="hall-card selected" id="hall-main" onclick="selectHall('main')">
+        <div class="hall-visual">
+          <div class="hall-visual-inner">
+            <svg viewBox="0 0 200 120" fill="none">
+              <polygon points="100,5 190,40 190,100 100,115 10,100 10,40" fill="rgba(200,151,58,0.1)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+              <polygon points="100,15 175,45 175,95 100,108 25,95 25,45" fill="rgba(196,31,94,0.08)" stroke="rgba(196,31,94,0.2)" stroke-width=".5"/>
+              <line x1="100" y1="5" x2="100" y2="15" stroke="rgba(200,151,58,0.5)" stroke-width=".8"/>
+              <rect x="60" y="70" width="80" height="30" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.2)" stroke-width=".5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hall-info">
+          <span class="hall-tag">Флагман</span>
+          <h3>Главный зал</h3>
+          <div class="hall-specs">
+            <div class="hall-spec"><span>Площадь</span><span>2 400 м²</span></div>
+            <div class="hall-spec"><span>Высота потолка</span><span>18 м</span></div>
+            <div class="hall-spec"><span>Трибуны</span><span>800 мест</span></div>
+            <div class="hall-spec"><span>Покрытие</span><span>FIG-сертифицированное</span></div>
+          </div>
+          <div class="hall-price">от 25 000<small> ₽/час</small></div>
+          <button class="hall-select-btn">✓ Выбрано</button>
+        </div>
+      </div>
+      <div class="hall-card" id="hall-academy" onclick="selectHall('academy')">
+        <div class="hall-visual">
+          <div class="hall-visual-inner">
+            <svg viewBox="0 0 200 120" fill="none">
+              <rect x="10" y="10" width="180" height="100" rx="2" fill="rgba(196,31,94,0.08)" stroke="rgba(196,31,94,0.3)" stroke-width="1"/>
+              <line x1="10" y1="60" x2="190" y2="60" stroke="rgba(200,151,58,0.2)" stroke-width=".5"/>
+              <line x1="100" y1="10" x2="100" y2="110" stroke="rgba(200,151,58,0.2)" stroke-width=".5"/>
+              <circle cx="100" cy="60" r="20" fill="none" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hall-info">
+          <span class="hall-tag">Универсальный</span>
+          <h3>Академия единоборств</h3>
+          <div class="hall-specs">
+            <div class="hall-spec"><span>Площадь</span><span>800 м²</span></div>
+            <div class="hall-spec"><span>Высота потолка</span><span>9 м</span></div>
+            <div class="hall-spec"><span>Трибуны</span><span>200 мест</span></div>
+            <div class="hall-spec"><span>Формат</span><span>Трансформер</span></div>
+          </div>
+          <div class="hall-price">от 12 000<small> ₽/час</small></div>
+          <button class="hall-select-btn">Выбрать</button>
+        </div>
+      </div>
+      <div class="hall-card" id="hall-choreo" onclick="selectHall('choreo')">
+        <div class="hall-visual">
+          <div class="hall-visual-inner">
+            <svg viewBox="0 0 200 120" fill="none">
+              <rect x="20" y="15" width="160" height="90" rx="2" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.25)" stroke-width="1"/>
+              <line x1="20" y1="15" x2="20" y2="105" stroke="rgba(200,151,58,0.3)" stroke-width="2"/>
+              <line x1="180" y1="15" x2="180" y2="105" stroke="rgba(200,151,58,0.3)" stroke-width="2"/>
+              <ellipse cx="100" cy="60" rx="30" ry="25" fill="none" stroke="rgba(196,31,94,0.3)" stroke-width=".7"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hall-info">
+          <span class="hall-tag">Хореография</span>
+          <h3>Хореографический класс</h3>
+          <div class="hall-specs">
+            <div class="hall-spec"><span>Площадь</span><span>200 м²</span></div>
+            <div class="hall-spec"><span>Высота потолка</span><span>5 м</span></div>
+            <div class="hall-spec"><span>Зеркала</span><span>Полная стена</span></div>
+            <div class="hall-spec"><span>Станки</span><span>Балетные</span></div>
+          </div>
+          <div class="hall-price">от 5 000<small> ₽/час</small></div>
+          <button class="hall-select-btn">Выбрать</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="sec calendar-section" id="calendar">
+  <div class="sec-inner">
+    <div class="sec-eyebrow reveal">Бронирование</div>
+    <h2 class="sec-title reveal">Интерактивный <em>календарь</em></h2>
+    <p class="reveal" style="font-size:.85rem;color:var(--w50);margin-top:.6rem;font-weight:300">Выберите тип мероприятия и доступную дату — зелёные дни свободны для бронирования</p>
+
+    <!-- event type -->
+    <div class="event-type-picker reveal" style="margin-top:2rem">
+      <div class="etype-btn active" onclick="setEventType('training',this)">
+        <span class="etype-icon">🏅</span>
+        <span class="etype-label">Тренировка</span>
+        <span class="etype-desc">УТС, разовая или системная</span>
+      </div>
+      <div class="etype-btn" onclick="setEventType('uts',this)">
+        <span class="etype-icon">⛺</span>
+        <span class="etype-label">УТС / Сборы</span>
+        <span class="etype-desc">Многодневная подготовка</span>
+      </div>
+      <div class="etype-btn" onclick="setEventType('competition',this)">
+        <span class="etype-icon">🏆</span>
+        <span class="etype-label">Соревнование</span>
+        <span class="etype-desc">Турнир, кубок, первенство</span>
+      </div>
+    </div>
+
+    <div class="calendar-layout">
+      <div>
+        <!-- Calendar widget -->
+        <div class="calendar-wrap reveal">
+          <div class="cal-header">
+            <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+            <span class="cal-month-label" id="calMonthLabel"></span>
+            <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+          </div>
+          <div class="cal-weekdays">
+            <div class="cal-wd">Пн</div><div class="cal-wd">Вт</div><div class="cal-wd">Ср</div>
+            <div class="cal-wd">Чт</div><div class="cal-wd">Пт</div><div class="cal-wd">Сб</div><div class="cal-wd">Вс</div>
+          </div>
+          <div class="cal-days" id="calDays"></div>
+          <div class="cal-legend">
+            <div class="cal-leg-item"><div class="cal-leg-dot avail"></div>Свободно</div>
+            <div class="cal-leg-item"><div class="cal-leg-dot busy"></div>Занято</div>
+            <div class="cal-leg-item"><div class="cal-leg-dot sel"></div>Выбрано</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKING SIDEBAR -->
+      <div class="booking-sidebar reveal">
+        <div class="sidebar-title">Заявка на аренду</div>
+        <div class="sidebar-sub">Заполните форму и мы свяжемся с вами в течение рабочего дня</div>
+
+        <div class="selected-date-display empty" id="selectedDateDisplay">
+          <span class="sdd-hint">← Выберите дату в календаре</span>
+        </div>
+
+        <div id="bookingFormWrap">
+          <div class="booking-form">
+            <div class="bf-field">
+              <span class="bf-label">Организация / ФИО</span>
+              <input class="bf-input" type="text" placeholder="СДЮСШОР Олимп">
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Телефон</span>
+              <input class="bf-input" type="tel" placeholder="+7 (___) ___-__-__">
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Email</span>
+              <input class="bf-input" type="email" placeholder="admin@school.ru">
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Зал</span>
+              <select class="bf-select" id="hallSelect">
+                <option>Главный зал (до 800 чел.)</option>
+                <option>Академия единоборств (до 200 чел.)</option>
+                <option>Хореографический класс</option>
+              </select>
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Тип мероприятия</span>
+              <select class="bf-select" id="eventTypeSelect">
+                <option value="training">Тренировка / УТС</option>
+                <option value="uts">Учебно-тренировочные сборы</option>
+                <option value="competition">Соревнование / Турнир</option>
+              </select>
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Примерное время и продолжительность</span>
+              <input class="bf-input" type="text" placeholder="10:00–18:00, 2 дня">
+            </div>
+            <div class="bf-field">
+              <span class="bf-label">Количество участников</span>
+              <input class="bf-input" type="text" placeholder="до 150 человек">
+            </div>
+            <p class="booking-consent">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+            <button class="booking-submit" onclick="submitBooking()">ОТПРАВИТЬ ЗАЯВКУ →</button>
+          </div>
+        </div>
+        <div class="booking-success" id="bookingSuccess">
+          <div class="booking-success-icon">✦</div>
+          <h3>Заявка отправлена!</h3>
+          <p>Наш менеджер свяжется с вами в течение рабочего дня для уточнения деталей и согласования договора аренды.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE TABLE -->
+<section class="sec price-section">
+  <div class="sec-inner">
+    <div class="sec-eyebrow reveal">Стоимость</div>
+    <h2 class="sec-title reveal">Тарифы <em>аренды</em></h2>
+    <table class="price-table reveal">
+      <thead>
+        <tr>
+          <th>Зал</th>
+          <th>Тренировка / УТС</th>
+          <th>Соревнование</th>
+          <th>Полный день (8 ч)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Главный зал</strong>
+            <div class="price-note">2 400 м² · высота 18 м · 800 мест</div>
+          </td>
+          <td><div class="price-val">25 000 ₽/ч</div></td>
+          <td><div class="price-val">35 000 ₽/ч</div><span class="price-badge pop">Популярно</span></td>
+          <td><div class="price-val">от 180 000 ₽</div></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Академия единоборств</strong>
+            <div class="price-note">800 м² · высота 9 м · трансформер</div>
+          </td>
+          <td><div class="price-val">12 000 ₽/ч</div></td>
+          <td><div class="price-val">18 000 ₽/ч</div></td>
+          <td><div class="price-val">от 85 000 ₽</div></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Хореографический класс</strong>
+            <div class="price-note">200 м² · зеркала · балетные станки</div>
+          </td>
+          <td><div class="price-val">5 000 ₽/ч</div></td>
+          <td><div class="price-val">—</div></td>
+          <td><div class="price-val">от 30 000 ₽</div></td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Все залы комплекса</strong>
+            <div class="price-note">Соревнования федерального уровня</div>
+          </td>
+          <td><div class="price-val">по запросу</div></td>
+          <td><div class="price-val">по запросу</div></td>
+          <td><div class="price-val">по запросу</div></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="reveal" style="margin-top:1rem;font-size:.75rem;color:var(--w50)">* Стоимость указана без НДС. Возможны скидки при долгосрочном сотрудничестве и бронировании от 3 дней. Уточняйте у менеджера.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Остались <em>вопросы?</em></h2>
+    <p>Позвоните нам или напишите — менеджер подберёт оптимальный вариант и подготовит коммерческое предложение</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a class="btn-rose" href="tel:+78007005174">
+        ПОЗВОНИТЬ
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.5 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a class="btn-rose" href="#calendar" style="background:transparent;border:1px solid rgba(200,151,58,.4);color:var(--gold-l);clip-path:none">
+        ВЫБРАТЬ ДАТУ →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a class="nav-logo" href="index.html" style="display:flex;margin-bottom:1rem">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:.7rem">
+          <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <ul><li><a href="about.html">О дворце</a></li><li><a href="about.html#team">Коллектив</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="gallery.html">Галерея</a></li><li><a href="rent.html">Арендаторам</a></li><li><a href="location.html">Контакты</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Аренда залов</h4>
+      <ul><li><a href="#hall-main">Главный зал</a></li><li><a href="#hall-academy">Академия единоборств</a></li><li><a href="#hall-choreo">Хореографический класс</a></li><li><a href="#calendar">Бронирование</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <div class="footer-contact">г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br><a href="tel:+78007005174">8 (800) 700-51-74</a><br><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a><br><br><a class="footer-contact-btn" href="location.html">КАК ДОБРАТЬСЯ →</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+  </div>
+</footer>
+
+<script>
+// mobile
+function openMob(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+// hall select
+let selectedHall = 'main';
+function selectHall(id){
+  selectedHall = id;
+  document.querySelectorAll('.hall-card').forEach(c=>{ c.classList.remove('selected'); c.querySelector('.hall-select-btn').textContent='Выбрать'; });
+  const card = document.getElementById('hall-'+id);
+  card.classList.add('selected');
+  card.querySelector('.hall-select-btn').textContent='✓ Выбрано';
+  const map = { main:'Главный зал (до 800 чел.)', academy:'Академия единоборств (до 200 чел.)', choreo:'Хореографический класс' };
+  document.getElementById('hallSelect').value = map[id];
+}
+
+// event type
+let selectedEventType = 'training';
+function setEventType(type, btn){
+  selectedEventType = type;
+  document.querySelectorAll('.etype-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const map = { training:'Тренировка / УТС', uts:'Учебно-тренировочные сборы', competition:'Соревнование / Турнир' };
+  document.getElementById('eventTypeSelect').value = map[type];
+  renderCalendar();
+}
+
+// CALENDAR
+const MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const now = new Date();
+let calYear = now.getFullYear();
+let calMonth = now.getMonth();
+let selectedDate = null;
+
+// busy dates per event type (day numbers in current/next months for demo)
+const BUSY_DATES = {
+  training:   { '2025-5':[3,4,10,17,24,25], '2025-6':[1,7,8,14,21,22,28], '2025-7':[5,12,13,19,20,26] },
+  uts:        { '2025-5':[5,6,7,20,21,22], '2025-6':[3,4,5,18,19,20], '2025-7':[4,5,6,7,15,16] },
+  competition:{ '2025-5':[14,15,16,28,29,30], '2025-6':[14,21,22], '2025-7':[5,6,19,20] },
+};
+
+function getBusyKey(y, m){ return y+'-'+m; }
+
+function changeMonth(dir){
+  calMonth += dir;
+  if(calMonth > 11){ calMonth=0; calYear++; }
+  if(calMonth < 0){ calMonth=11; calYear--; }
+  selectedDate = null;
+  updateDateDisplay();
+  renderCalendar();
+}
+
+function renderCalendar(){
+  document.getElementById('calMonthLabel').textContent = MONTHS_RU[calMonth] + ' ' + calYear;
+  const container = document.getElementById('calDays');
+  container.innerHTML = '';
+
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const offset = (firstDay === 0) ? 6 : firstDay - 1;
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const busyKey = getBusyKey(calYear, calMonth);
+  const busyDays = (BUSY_DATES[selectedEventType] || {})[busyKey] || [];
+  const todayD = now.getDate(), todayM = now.getMonth(), todayY = now.getFullYear();
+
+  for(let i=0; i<offset; i++){
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    container.appendChild(empty);
+  }
+
+  for(let d=1; d<=daysInMonth; d++){
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.textContent = d;
+
+    const isPast = (calYear < todayY) || (calYear===todayY && calMonth<todayM) || (calYear===todayY && calMonth===todayM && d<todayD);
+    const isToday = calYear===todayY && calMonth===todayM && d===todayD;
+    const isBusy = busyDays.includes(d);
+    const isSel = selectedDate && selectedDate.d===d && selectedDate.m===calMonth && selectedDate.y===calYear;
+
+    if(isSel) el.classList.add('selected');
+    else if(isPast) el.classList.add('past');
+    else if(isBusy) el.classList.add('busy');
+    else { el.classList.add('available'); }
+
+    if(isToday && !isSel) el.classList.add('today');
+
+    if(!isPast && !isBusy){
+      el.onclick = () => pickDate(d, calMonth, calYear, busyDays.includes(d));
+    }
+    container.appendChild(el);
+  }
+}
+
+function pickDate(d, m, y, busy){
+  if(busy) return;
+  selectedDate = {d, m, y};
+  renderCalendar();
+  updateDateDisplay();
+}
+
+function updateDateDisplay(){
+  const el = document.getElementById('selectedDateDisplay');
+  if(selectedDate){
+    const dateStr = selectedDate.d + ' ' + MONTHS_RU[selectedDate.m] + ' ' + selectedDate.y;
+    el.classList.remove('empty');
+    el.innerHTML = `<span class="sdd-text">📅 ${dateStr}</span>`;
+  } else {
+    el.classList.add('empty');
+    el.innerHTML = '<span class="sdd-hint">← Выберите дату в календаре</span>';
+  }
+}
+
+function submitBooking(){
+  document.getElementById('bookingFormWrap').style.display='none';
+  document.getElementById('bookingSuccess').style.display='block';
+}
+
+// reveal
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+renderCalendar();
+</script>
+</body>
+</html>

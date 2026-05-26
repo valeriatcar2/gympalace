@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>О дворце — Дворец Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:     #130810;
+  --bg2:    #1E0D1A;
+  --bg3:    #2A1225;
+  --rose:   #C41F5E;
+  --rose-h: #E0256E;
+  --rose-p: #F5D0DF;
+  --gold:   #C8973A;
+  --gold-l: #E8C97A;
+  --white:  #FFFFFF;
+  --w80:    rgba(255,255,255,0.8);
+  --w60:    rgba(255,255,255,0.6);
+  --w50:    rgba(255,255,255,0.5);
+  --w20:    rgba(255,255,255,0.2);
+  --w08:    rgba(255,255,255,0.08);
+  --w04:    rgba(255,255,255,0.04);
+  --border: rgba(200,151,58,0.2);
+  --font-d: 'Cormorant Garamond', serif;
+  --font-b: 'Raleway', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-b); background: var(--bg); color: var(--white); font-size: 15px; line-height: 1.7; font-weight: 400; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* grain */
+body::before { content:''; position:fixed; inset:0; z-index:1000; pointer-events:none; opacity:.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:200px 200px; }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:500; display:flex; align-items:center; justify-content:space-between; padding:1rem 4rem; background:rgba(19,8,16,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+.nav-logo { display:flex; align-items:center; gap:.9rem; }
+.nav-logo-gem { width:32px; height:37px; flex-shrink:0; }
+.nav-logo-text { font-family:var(--font-d); font-size:.78rem; font-weight:600; letter-spacing:.08em; line-height:1.35; color:var(--white); text-transform:uppercase; }
+.nav-links { display:flex; gap:2.2rem; list-style:none; }
+.nav-links a { font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--w80); transition:color .3s; font-weight:500; }
+.nav-links a:hover { color:var(--gold-l); }
+.nav-links a.active { color:var(--gold-l); border-bottom:1px solid var(--gold); padding-bottom:2px; }
+.nav-btn { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; padding:.65rem 1.6rem; border:1px solid var(--rose); color:var(--white); background:transparent; cursor:pointer; font-family:var(--font-b); font-weight:600; transition:all .3s; }
+.nav-btn:hover { background:var(--rose); }
+.burger { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
+.burger span { display:block; width:24px; height:1.5px; background:var(--white); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  position: relative; min-height: 60vh;
+  display: flex; align-items: flex-end;
+  padding: 0 4rem 5rem; overflow: hidden;
+  background: var(--bg);
+}
+.hero-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 100% at 70% 40%, rgba(196,31,94,0.13), transparent 55%),
+    radial-gradient(ellipse 50% 80% at 10% 80%, rgba(200,151,58,0.08), transparent 50%),
+    linear-gradient(to top, rgba(19,8,16,0.9) 0%, transparent 60%);
+}
+.hero-crystal-right {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 3rem; opacity: .22; pointer-events: none;
+}
+.hero-crystal-right svg { width: 360px; height: 420px; }
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow { font-size:.63rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
+.hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+.hero-title { font-family:var(--font-d); font-size:clamp(3.5rem,9vw,7rem); font-weight:300; line-height:.9; letter-spacing:-.02em; }
+.hero-title em { font-style:italic; color:var(--gold-l); display:block; }
+.hero-sub { font-size:.9rem; color:var(--w50); margin-top:1.4rem; max-width:460px; line-height:1.9; font-weight:300; }
+
+/* ── SECTION COMMONS ── */
+.sec { padding: 6rem 4rem; }
+.sec-eyebrow { font-size:.63rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
+.sec-eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+.sec-title { font-family:var(--font-d); font-size:clamp(2rem,4.5vw,3.6rem); font-weight:300; line-height:1.05; letter-spacing:-.01em; }
+.sec-title em { font-style:italic; color:var(--gold-l); }
+.sec-title .rose { color:#F0A8BB; }
+
+/* ── ABOUT INFO ── */
+.about-info { background: var(--bg2); border-bottom: 1px solid var(--border); }
+.about-info-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.about-text { font-size:.9rem; color:var(--w60); line-height:1.95; font-weight:300; }
+.about-text p+p { margin-top:1.3rem; }
+.about-text strong { color:var(--gold-l); font-weight:500; }
+.about-right {}
+.about-stats { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:2px; }
+.stat-box { background:var(--bg3); padding:2rem 1.8rem; }
+.stat-num { font-family:var(--font-d); font-size:3rem; font-weight:300; color:var(--gold-l); line-height:1; }
+.stat-label { font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--w50); margin-top:.4rem; }
+.about-quote-box { background:var(--bg3); padding:2.5rem; border-left:2px solid var(--rose); margin-top:0; }
+.about-quote-box p { font-family:var(--font-d); font-size:1.15rem; font-style:italic; color:var(--w80); line-height:1.6; }
+.about-quote-box cite { display:block; margin-top:1rem; font-size:.65rem; letter-spacing:.15em; text-transform:uppercase; color:var(--rose-p); font-style:normal; }
+
+/* ── CRYSTAL BUILDING SECTION ── */
+.crystal-section { background:var(--bg); border-bottom:1px solid var(--border); }
+.crystal-inner { max-width:1300px; margin:0 auto; }
+.crystal-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.crystal-visual { position:relative; }
+.crystal-svg-wrap { position:relative; }
+.crystal-svg-wrap svg { width:100%; max-width:520px; }
+.crystal-glow { position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(196,31,94,0.12), transparent 70%); pointer-events:none; }
+.crystal-facts { display:flex; flex-direction:column; gap:2px; }
+.crystal-fact { background:var(--bg2); padding:1.5rem 2rem; display:flex; align-items:flex-start; gap:1.2rem; border-left:2px solid transparent; transition:border-color .3s; }
+.crystal-fact:hover { border-left-color:var(--gold); }
+.crystal-fact-icon { flex-shrink:0; margin-top:2px; }
+.crystal-fact-icon svg { width:28px; height:28px; stroke:var(--gold); fill:none; stroke-width:1.3; }
+.crystal-fact-title { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-l); font-weight:600; margin-bottom:.3rem; }
+.crystal-fact-desc { font-size:.82rem; color:var(--w50); line-height:1.65; font-weight:300; }
+
+/* ── MISSION ── */
+.mission-section { background:var(--bg3); border-bottom:1px solid var(--border); }
+.mission-inner { max-width:1300px; margin:0 auto; }
+.mission-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:3rem; }
+.mission-card { background:var(--bg2); padding:2.5rem 2rem; border-top:2px solid transparent; transition:border-color .3s; }
+.mission-card:hover { border-top-color:var(--rose); }
+.mission-num { font-family:var(--font-d); font-size:3.5rem; font-weight:300; color:rgba(196,31,94,.25); line-height:1; margin-bottom:1rem; }
+.mission-card h3 { font-family:var(--font-d); font-size:1.3rem; font-weight:400; margin-bottom:.8rem; }
+.mission-card p { font-size:.82rem; color:var(--w50); line-height:1.75; font-weight:300; }
+
+/* ── TEAM ── */
+.team-section { background:var(--bg); border-bottom:1px solid var(--border); }
+.team-inner { max-width:1300px; margin:0 auto; }
+
+/* inner tab nav */
+.team-tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:3rem; gap:0; }
+.team-tab { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; padding:1rem 2rem; cursor:pointer; background:transparent; color:var(--w50); border:none; font-family:var(--font-b); font-weight:600; transition:all .3s; border-bottom:2px solid transparent; margin-bottom:-1px; }
+.team-tab.active { color:var(--gold-l); border-bottom-color:var(--gold); }
+.team-tab:hover:not(.active) { color:var(--w80); }
+
+.team-panel { display:none; }
+.team-panel.active { display:block; }
+
+/* Management — big cards */
+.mgmt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+.mgmt-card { background:var(--bg2); overflow:hidden; border-top:2px solid transparent; transition:border-color .3s; }
+.mgmt-card:hover { border-top-color:var(--rose); }
+.mgmt-photo {
+  width:100%; padding-bottom:100%; position:relative; overflow:hidden;
+  background:var(--bg3);
+}
+.mgmt-photo-inner {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:.6rem;
+}
+.mgmt-initials {
+  width:72px; height:72px;
+  background:linear-gradient(135deg,rgba(196,31,94,0.3),rgba(200,151,58,0.2));
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-d); font-size:1.6rem; color:var(--gold-l);
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.mgmt-photo-label { font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; color:var(--w50); }
+.mgmt-photo-add { font-size:.55rem; color:rgba(200,151,58,.4); margin-top:.2rem; }
+.mgmt-info { padding:1.8rem; }
+.mgmt-name { font-family:var(--font-d); font-size:1.2rem; font-weight:400; margin-bottom:.4rem; line-height:1.2; }
+.mgmt-rank { font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-l); margin-bottom:.3rem; font-weight:600; }
+.mgmt-role { font-size:.75rem; color:var(--w50); }
+
+/* Coach cards — smaller grid */
+.coaches-group { margin-bottom:3rem; }
+.coaches-group-title { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--w50); padding-bottom:.8rem; border-bottom:1px solid var(--border); margin-bottom:1.5rem; font-weight:600; display:flex; align-items:center; gap:.8rem; }
+.coaches-group-title::before { content:''; width:20px; height:1px; background:var(--rose); }
+.coaches-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:2px; }
+.coach-card { background:var(--bg2); padding:1.8rem 1.5rem; text-align:center; border-top:2px solid transparent; transition:border-color .3s; }
+.coach-card:hover { border-top-color:var(--gold); }
+.coach-gem {
+  width:52px; height:60px; margin:0 auto 1rem;
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.coach-gem svg { width:52px; height:60px; }
+.coach-gem-initials {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-d); font-size:1rem; color:var(--gold-l);
+}
+.coach-name { font-family:var(--font-d); font-size:1rem; font-weight:400; margin-bottom:.3rem; line-height:1.2; }
+.coach-rank { font-size:.62rem; color:var(--gold-l); letter-spacing:.06em; margin-bottom:.2rem; }
+.coach-role { font-size:.65rem; color:var(--w50); }
+/* photo upload hint */
+.photo-hint { display:block; font-size:.55rem; color:rgba(200,151,58,.35); letter-spacing:.08em; text-align:center; margin-top:.3rem; }
+
+/* Admin grid */
+.admin-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:2px; }
+.admin-card { background:var(--bg2); padding:1.8rem 2rem; display:flex; align-items:center; gap:1.2rem; border-left:2px solid transparent; transition:border-color .3s; }
+.admin-card:hover { border-left-color:var(--rose); }
+.admin-gem { width:44px; height:44px; flex-shrink:0; }
+.admin-gem svg { width:44px; height:44px; }
+.admin-name { font-size:.88rem; font-weight:500; margin-bottom:.2rem; }
+.admin-role { font-size:.72rem; color:var(--w50); }
+
+/* ── CTA BAND ── */
+.cta-band { background:var(--bg2); padding:5rem 4rem; text-align:center; border-top:1px solid var(--border); position:relative; overflow:hidden; }
+.cta-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(196,31,94,.1),transparent 60%); pointer-events:none; }
+.cta-inner { position:relative; z-index:1; }
+.cta-inner h2 { font-family:var(--font-d); font-size:clamp(2rem,4vw,3.2rem); font-weight:300; margin-bottom:.8rem; }
+.cta-inner h2 em { font-style:italic; color:var(--gold-l); }
+.cta-inner p { font-size:.88rem; color:var(--w50); margin-bottom:2rem; font-weight:300; }
+.btn-rose { display:inline-flex; align-items:center; gap:.8rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; padding:1rem 2.2rem; background:var(--rose); color:var(--white); border:none; cursor:pointer; font-family:var(--font-b); font-weight:600; transition:all .3s; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+.btn-rose:hover { background:var(--rose-h); }
+.btn-rose svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; }
+
+/* ── FOOTER ── */
+footer { background:rgba(10,4,9,1); padding:4rem 4rem 2rem; border-top:1px solid var(--border); }
+.footer-top { display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:3rem; max-width:1300px; margin:0 auto 3rem; }
+.footer-socials { display:flex; gap:.7rem; margin-top:1.5rem; }
+.footer-social { width:36px; height:36px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:all .3s; }
+.footer-social:hover { border-color:var(--rose); background:var(--rose); }
+.footer-social svg { width:16px; height:16px; fill:var(--w80); }
+.footer-col h4 { font-size:.63rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; font-weight:600; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.footer-col ul li a { font-size:.78rem; color:var(--w50); transition:color .3s; }
+.footer-col ul li a:hover { color:var(--gold-l); }
+.footer-contact { font-size:.78rem; color:var(--w50); line-height:1.7; }
+.footer-contact a { color:var(--w80); transition:color .3s; }
+.footer-contact a:hover { color:var(--gold-l); }
+.footer-contact-btn { display:inline-block; margin-top:.5rem; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:.5rem 1rem; border:1px solid var(--border); color:var(--gold-l); font-family:var(--font-b); font-weight:600; transition:all .3s; }
+.footer-contact-btn:hover { background:var(--gold); border-color:var(--gold); color:var(--bg); }
+.footer-bottom { max-width:1300px; margin:0 auto; padding-top:2rem; border-top:1px solid var(--w04); display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-size:.68rem; color:rgba(255,255,255,.2); }
+.footer-bottom-links { display:flex; gap:1.5rem; }
+.footer-bottom-links a { font-size:.65rem; color:rgba(255,255,255,.2); transition:color .3s; }
+.footer-bottom-links a:hover { color:var(--w50); }
+
+/* mobile */
+.mobile-menu { position:fixed; inset:0; z-index:600; background:rgba(19,8,16,.98); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; transform:translateX(100%); transition:transform .45s cubic-bezier(.16,1,.3,1); }
+.mobile-menu.open { transform:translateX(0); }
+.mobile-menu a { font-family:var(--font-d); font-size:2.2rem; font-weight:300; color:var(--w80); transition:color .3s; }
+.mobile-menu a:hover { color:var(--gold-l); }
+.mobile-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; cursor:pointer; color:var(--w50); font-size:1.8rem; padding:.5rem; line-height:1; }
+
+/* reveal */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.in { opacity:1; transform:none; }
+.rd1 { transition-delay:.1s; } .rd2 { transition-delay:.2s; } .rd3 { transition-delay:.3s; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none} }
+.hero-eyebrow { animation:fadeUp .8s ease both .2s; }
+.hero-title    { animation:fadeUp .8s ease both .38s; }
+.hero-sub      { animation:fadeUp .8s ease both .54s; }
+
+@media (max-width:1024px) {
+  nav,.page-hero,.sec,.cta-band,footer { padding-left:2rem; padding-right:2rem; }
+  .nav-links,.nav-btn { display:none; }
+  .burger { display:flex; }
+  .about-info-inner,.crystal-grid { grid-template-columns:1fr; gap:3rem; }
+  .mgmt-grid { grid-template-columns:1fr 1fr; }
+  .mission-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; gap:1rem; text-align:center; }
+  .hero-crystal-right { display:none; }
+}
+@media (max-width:600px) {
+  .mgmt-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; }
+  .about-stats { grid-template-columns:1fr 1fr; }
+  .team-tabs { flex-wrap:wrap; }
+  .team-tab { font-size:.58rem; padding:.8rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="index.html">Главная</a>
+  <a href="about.html">О дворце</a>
+  <a href="index.html#programs">Занятия</a>
+  <a href="events.html">Мероприятия</a>
+  <a href="rent.html">Арендаторам</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="location.html">Контакты</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">О дворце</a></li>
+    <li><a href="index.html#programs">Занятия</a></li>
+    <li><a href="events.html">Мероприятия</a></li>
+    <li><a href="rent.html">Арендаторам</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="location.html">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="location.html">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-crystal-right">
+    <svg viewBox="0 0 360 420" fill="none">
+      <polygon points="180,5 350,85 350,335 180,415 10,335 10,85" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+      <polygon points="180,35 310,102 310,318 180,385 50,318 50,102" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.2)" stroke-width=".6"/>
+      <polygon points="180,75 270,125 270,295 180,345 90,295 90,125" fill="rgba(196,31,94,0.07)"/>
+      <polygon points="180,5 270,125 180,75" fill="rgba(200,151,58,0.08)" stroke="rgba(200,151,58,0.3)" stroke-width=".5"/>
+      <polygon points="350,85 270,125 180,75" fill="rgba(196,31,94,0.06)" stroke="rgba(196,31,94,0.2)" stroke-width=".5"/>
+      <polygon points="350,85 270,125 270,295" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/>
+      <polygon points="180,415 270,295 180,345" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.2)" stroke-width=".5"/>
+      <polygon points="10,335 90,295 180,345" fill="rgba(196,31,94,0.05)" stroke="rgba(196,31,94,0.15)" stroke-width=".4"/>
+      <polygon points="10,85 90,125 180,75" fill="rgba(200,151,58,0.05)" stroke="rgba(200,151,58,0.2)" stroke-width=".4"/>
+      <line x1="180" y1="5" x2="180" y2="75" stroke="rgba(200,151,58,0.5)" stroke-width=".8"/>
+      <line x1="350" y1="85" x2="270" y2="125" stroke="rgba(200,151,58,0.4)" stroke-width=".7"/>
+      <line x1="350" y1="335" x2="270" y2="295" stroke="rgba(200,151,58,0.4)" stroke-width=".7"/>
+      <line x1="180" y1="415" x2="180" y2="345" stroke="rgba(200,151,58,0.4)" stroke-width=".7"/>
+      <line x1="10" y1="335" x2="90" y2="295" stroke="rgba(200,151,58,0.4)" stroke-width=".7"/>
+      <line x1="10" y1="85" x2="90" y2="125" stroke="rgba(200,151,58,0.4)" stroke-width=".7"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Дворец Ирины Винер</div>
+    <h1 class="hero-title">О<br><em>ДВОРЦЕ</em></h1>
+    <p class="hero-sub">История, миссия и уникальная архитектура комплекса в Ватутинках — пространства, вдохновляющего на великие достижения.</p>
+  </div>
+</div>
+
+<!-- ABOUT INFO -->
+<section class="sec about-info">
+  <div class="about-info-inner">
+    <div>
+      <div class="sec-eyebrow reveal">История и миссия</div>
+      <h2 class="sec-title reveal">Традиции <em>побед</em></h2>
+      <div class="about-text reveal" style="margin-top:1.8rem">
+        <p>Дворец спорта и образования Ирины Винер — уникальный спортивный комплекс в посёлке Ватутинки Новой Москвы, созданный по стандартам <strong>Международной Федерации гимнастики (FIG)</strong>.</p>
+        <p>Здание в форме кристалла с 18-метровыми потолками и прозрачной крышей — не просто архитектурный шедевр, но и идеальное функциональное пространство для тренировок мирового уровня.</p>
+        <p>Наши ученики тренируются под руководством <strong>чемпионов и призёров Олимпийских игр</strong>, чемпионатов мира и Европы. Богатые традиции, уникальный опыт и передовые методики — основа нашей работы.</p>
+        <p>Мы прививаем любовь к спорту и искусству с раннего детства, воспитывая не просто спортсменов, но <strong>гармоничных, образованных личностей.</strong></p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="about-stats">
+        <div class="stat-box"><div class="stat-num">18м</div><div class="stat-label">Высота потолков</div></div>
+        <div class="stat-box"><div class="stat-num">FIG</div><div class="stat-label">Стандарт федерации</div></div>
+        <div class="stat-box"><div class="stat-num">580+</div><div class="stat-label">Медалей завоёвано</div></div>
+        <div class="stat-box"><div class="stat-num">3–18</div><div class="stat-label">Возраст учеников</div></div>
+      </div>
+      <div class="about-quote-box" style="margin-top:2px">
+        <p>Моя цель — не только победы на ковре, но и сильная, образованная, гармоничная личность.</p>
+        <cite>— Ирина Винер, президент Всероссийской федерации художественной гимнастики</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRYSTAL BUILDING -->
+<section class="sec crystal-section">
+  <div class="crystal-inner">
+    <div class="sec-eyebrow reveal">Архитектура</div>
+    <h2 class="sec-title reveal">Здание-<em>кристалл</em></h2>
+    <div class="crystal-grid" style="margin-top:3rem">
+      <div class="crystal-visual reveal">
+        <div class="crystal-svg-wrap">
+          <div class="crystal-glow"></div>
+          <svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Main body -->
+            <polygon points="260,30 490,130 490,380 260,460 30,380 30,130" fill="rgba(42,18,37,0.9)" stroke="rgba(200,151,58,0.35)" stroke-width="1.2"/>
+            <!-- Spires -->
+            <polygon points="260,30 340,145 260,130 180,145" fill="rgba(196,31,94,0.2)" stroke="rgba(196,31,94,0.5)" stroke-width="1"/>
+            <polygon points="340,70 400,155 340,145 260,130" fill="rgba(200,151,58,0.12)" stroke="rgba(200,151,58,0.4)" stroke-width=".8"/>
+            <polygon points="180,80 260,130 180,145 120,155" fill="rgba(200,151,58,0.1)" stroke="rgba(200,151,58,0.35)" stroke-width=".8"/>
+            <polygon points="400,100 450,170 400,155 340,145" fill="rgba(196,31,94,0.1)" stroke="rgba(196,31,94,0.3)" stroke-width=".6"/>
+            <polygon points="120,110 180,145 120,155 80,170" fill="rgba(196,31,94,0.08)" stroke="rgba(196,31,94,0.25)" stroke-width=".6"/>
+            <!-- Facet lines -->
+            <line x1="260" y1="30" x2="260" y2="130" stroke="rgba(200,151,58,0.45)" stroke-width=".9"/>
+            <line x1="490" y1="130" x2="400" y2="155" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            <line x1="490" y1="380" x2="400" y2="350" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            <line x1="260" y1="460" x2="260" y2="370" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            <line x1="30" y1="380" x2="120" y2="350" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            <line x1="30" y1="130" x2="120" y2="155" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/>
+            <!-- Inner structural lines -->
+            <line x1="260" y1="130" x2="490" y2="380" stroke="rgba(196,31,94,0.1)" stroke-width=".6"/>
+            <line x1="260" y1="130" x2="30" y2="380" stroke="rgba(196,31,94,0.1)" stroke-width=".6"/>
+            <line x1="260" y1="130" x2="260" y2="460" stroke="rgba(200,151,58,0.12)" stroke-width=".5"/>
+            <!-- Mid horizontal -->
+            <line x1="30" y1="255" x2="490" y2="255" stroke="rgba(200,151,58,0.08)" stroke-width=".5"/>
+            <!-- Windows glow effect -->
+            <ellipse cx="260" cy="280" rx="120" ry="90" fill="rgba(196,31,94,0.06)"/>
+            <ellipse cx="260" cy="170" rx="60" ry="40" fill="rgba(200,151,58,0.08)"/>
+            <!-- Ground line -->
+            <line x1="30" y1="380" x2="490" y2="380" stroke="rgba(200,151,58,0.2)" stroke-width="1"/>
+            <line x1="0" y1="385" x2="520" y2="385" stroke="rgba(200,151,58,0.08)" stroke-width=".5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="crystal-facts">
+        <div class="crystal-fact reveal rd1">
+          <div class="crystal-fact-icon"><svg viewBox="0 0 28 28"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke-width="1.3"/><line x1="14" y1="2" x2="14" y2="8"/><line x1="26" y1="8" x2="20" y2="12"/></svg></div>
+          <div><div class="crystal-fact-title">Форма кристалла</div><div class="crystal-fact-desc">Уникальная многогранная архитектура вдохновлена природными кристаллами — символом чистоты, силы и совершенства.</div></div>
+        </div>
+        <div class="crystal-fact reveal rd2">
+          <div class="crystal-fact-icon"><svg viewBox="0 0 28 28"><path d="M4 22V10l10-8 10 8v12H4z"/><path d="M10 22v-6h8v6"/></svg></div>
+          <div><div class="crystal-fact-title">18 метров высота</div><div class="crystal-fact-desc">Просторный зал с 18-метровым потолком и прозрачной крышей обеспечивает идеальное естественное освещение для тренировок.</div></div>
+        </div>
+        <div class="crystal-fact reveal rd3">
+          <div class="crystal-fact-icon"><svg viewBox="0 0 28 28"><rect x="3" y="3" width="22" height="22" rx="2"/><path d="M8 14l4 4 8-8"/></svg></div>
+          <div><div class="crystal-fact-title">Стандарт FIG</div><div class="crystal-fact-desc">Зал спроектирован и оборудован в соответствии со стандартами Международной Федерации гимнастики, включая покрытие и освещение.</div></div>
+        </div>
+        <div class="crystal-fact reveal">
+          <div class="crystal-fact-icon"><svg viewBox="0 0 28 28"><path d="M14 3C8 3 3 8 3 14s5 11 11 11 11-5 11-11S20 3 14 3z"/><path d="M9 14l3 3 7-7"/></svg></div>
+          <div><div class="crystal-fact-title">Трибуны и инфраструктура</div><div class="crystal-fact-desc">Зрительские трибуны, зал-трансформер для единоборств, хореографические классы, раздевалки и зоны отдыха.</div></div>
+        </div>
+        <div class="crystal-fact reveal">
+          <div class="crystal-fact-icon"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/><path d="M14 8v6l4 2"/></svg></div>
+          <div><div class="crystal-fact-title">Russian Design District</div><div class="crystal-fact-desc">Дворец расположен в инновационном жилом квартале Новой Москвы с развитой инфраструктурой и удобным транспортным доступом.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="sec mission-section">
+  <div class="mission-inner">
+    <div class="sec-eyebrow reveal">Наши ценности</div>
+    <h2 class="sec-title reveal">Три <em>столпа</em> дворца</h2>
+    <div class="mission-grid">
+      <div class="mission-card reveal rd1">
+        <div class="mission-num">01</div>
+        <h3>Спортивное<br>мастерство</h3>
+        <p>Воспитание чемпионов через системные тренировки, индивидуальный подход и работу с лучшими наставниками страны.</p>
+      </div>
+      <div class="mission-card reveal rd2">
+        <div class="mission-num">02</div>
+        <h3>Образование<br>и развитие</h3>
+        <p>Гармоничное развитие личности: художественное, интеллектуальное и духовное воспитание в едином пространстве.</p>
+      </div>
+      <div class="mission-card reveal rd3">
+        <div class="mission-num">03</div>
+        <h3>Красота<br>и эстетика</h3>
+        <p>Прививание чувства прекрасного через хореографию, музыку и художественную гимнастику — искусство движения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec team-section" id="team">
+  <div class="team-inner">
+    <div class="sec-eyebrow reveal">Наша команда</div>
+    <h2 class="sec-title reveal">Коллектив <em>дворца</em></h2>
+    <p class="reveal" style="font-size:.88rem;color:var(--w50);margin-top:.8rem;font-weight:300;max-width:560px">Тренируют и вдохновляют наших учеников олимпийские чемпионы, заслуженные тренеры и профессиональные педагоги.</p>
+
+    <!-- TABS -->
+    <div class="team-tabs reveal" style="margin-top:2.5rem">
+      <button class="team-tab active" onclick="showTab('mgmt',this)">Руководство</button>
+      <button class="team-tab" onclick="showTab('coaches',this)">Тренеры</button>
+      <button class="team-tab" onclick="showTab('choreo',this)">Хореографы</button>
+      <button class="team-tab" onclick="showTab('admin',this)">Администрация</button>
+    </div>
+
+    <!-- РУКОВОДСТВО -->
+    <div class="team-panel active" id="tab-mgmt">
+      <div class="mgmt-grid">
+        <div class="mgmt-card reveal">
+          <div class="mgmt-photo">
+            <div class="mgmt-photo-inner">
+              <div class="mgmt-initials">ИВ</div>
+              <span class="mgmt-photo-label">Фото</span>
+              <span class="mgmt-photo-add">заменить на реальное</span>
+            </div>
+          </div>
+          <div class="mgmt-info">
+            <div class="mgmt-name">Ирина Александровна Винер</div>
+            <div class="mgmt-rank">Президент федерации · ЗТР</div>
+            <div class="mgmt-role">Основатель, почётный президент и идейный вдохновитель дворца</div>
+          </div>
+        </div>
+        <div class="mgmt-card reveal rd1">
+          <div class="mgmt-photo">
+            <div class="mgmt-photo-inner">
+              <div class="mgmt-initials">ГТ</div>
+              <span class="mgmt-photo-label">Фото</span>
+              <span class="mgmt-photo-add">заменить на реальное</span>
+            </div>
+          </div>
+          <div class="mgmt-info">
+            <div class="mgmt-name">Главный тренер</div>
+            <div class="mgmt-rank">ЗМС · Олимпийский призёр</div>
+            <div class="mgmt-role">Руководство спортивным направлением и методической работой</div>
+          </div>
+        </div>
+        <div class="mgmt-card reveal rd2">
+          <div class="mgmt-photo">
+            <div class="mgmt-photo-inner">
+              <div class="mgmt-initials">ДП</div>
+              <span class="mgmt-photo-label">Фото</span>
+              <span class="mgmt-photo-add">заменить на реальное</span>
+            </div>
+          </div>
+          <div class="mgmt-info">
+            <div class="mgmt-name">Директор дворца</div>
+            <div class="mgmt-rank">Заслуженный тренер России</div>
+            <div class="mgmt-role">Административное управление, развитие инфраструктуры</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ТРЕНЕРЫ -->
+    <div class="team-panel" id="tab-coaches">
+      <div class="coaches-group">
+        <div class="coaches-group-title">Группы 3–7 лет</div>
+        <div class="coaches-grid">
+          <div class="coach-card reveal">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">ЕС</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">КМС по художественной гимнастике</div>
+            <div class="coach-role">Группы 3–4 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd1">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">МП</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">МС по художественной гимнастике</div>
+            <div class="coach-role">Группы 4–5 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd2">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">АК</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">КМС, призёр первенства России</div>
+            <div class="coach-role">Начальная подготовка 6–7 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+        </div>
+      </div>
+      <div class="coaches-group">
+        <div class="coaches-group-title">Спортивные группы 8+ лет</div>
+        <div class="coaches-grid">
+          <div class="coach-card reveal">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">НО</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">МС, призёр чемпионата России</div>
+            <div class="coach-role">Спортивная специализация 8–9 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd1">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">ТВ</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">МСМК, чемпион Европы</div>
+            <div class="coach-role">Спортивная специализация 10–11 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd2">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">РД</div></div>
+            <div class="coach-name">Тренер группы</div>
+            <div class="coach-rank">ЗМСМК, призёр Олимпийских игр</div>
+            <div class="coach-role">Группы совершенствования мастерства</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd3">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(196,31,94,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials">СЛ</div></div>
+            <div class="coach-name">Тренер по ОФП</div>
+            <div class="coach-rank">КМС, сертифицированный специалист</div>
+            <div class="coach-role">Общая физическая подготовка</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ХОРЕОГРАФЫ -->
+    <div class="team-panel" id="tab-choreo">
+      <div class="coaches-group">
+        <div class="coaches-group-title">Педагоги по хореографии</div>
+        <div class="coaches-grid">
+          <div class="coach-card reveal">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(200,151,58,0.12)" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials" style="color:var(--gold-l)">АМ</div></div>
+            <div class="coach-name">Педагог по классическому балету</div>
+            <div class="coach-rank" style="color:var(--gold-l)">Выпускница МГАХ</div>
+            <div class="coach-role">Классическая хореография, 3–10 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd1">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(200,151,58,0.12)" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials" style="color:var(--gold-l)">ЛВ</div></div>
+            <div class="coach-name">Педагог по современной хореографии</div>
+            <div class="coach-rank" style="color:var(--gold-l)">КМС, педагог высшей категории</div>
+            <div class="coach-role">Современный танец, 8–18 лет</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+          <div class="coach-card reveal rd2">
+            <div class="coach-gem"><svg viewBox="0 0 52 60" fill="none"><polygon points="26,2 50,14 50,46 26,58 2,46 2,14" fill="rgba(200,151,58,0.12)" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/><polygon points="26,10 42,18 42,42 26,50 10,42 10,18" fill="rgba(200,151,58,0.06)" stroke="rgba(200,151,58,0.15)" stroke-width=".4"/></svg><div class="coach-gem-initials" style="color:var(--gold-l)">ИМ</div></div>
+            <div class="coach-name">Тренер по стретчингу</div>
+            <div class="coach-rank" style="color:var(--gold-l)">Сертифицированный инструктор</div>
+            <div class="coach-role">Стретчинг, взрослые группы</div>
+            <span class="photo-hint">← заменить на фото</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- АДМИНИСТРАЦИЯ -->
+    <div class="team-panel" id="tab-admin">
+      <div class="admin-grid">
+        <div class="admin-card reveal">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">ОН</text></svg></div>
+          <div><div class="admin-name">Администратор</div><div class="admin-role">Запись, расписание, консультации</div></div>
+        </div>
+        <div class="admin-card reveal rd1">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">СМ</text></svg></div>
+          <div><div class="admin-name">Менеджер по работе с родителями</div><div class="admin-role">Сопровождение семей, коммуникации</div></div>
+        </div>
+        <div class="admin-card reveal rd2">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">КМ</text></svg></div>
+          <div><div class="admin-name">Менеджер по аренде</div><div class="admin-role">Аренда залов, договоры, организация</div></div>
+        </div>
+        <div class="admin-card reveal rd3">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">АД</text></svg></div>
+          <div><div class="admin-name">PR и социальные сети</div><div class="admin-role">Контент, медиа, коммуникации</div></div>
+        </div>
+        <div class="admin-card reveal">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">ТБ</text></svg></div>
+          <div><div class="admin-name">Бухгалтерия</div><div class="admin-role">Финансы, договоры, оплата</div></div>
+        </div>
+        <div class="admin-card reveal rd1">
+          <div class="admin-gem"><svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="rgba(196,31,94,0.12)" stroke="rgba(200,151,58,0.3)" stroke-width=".7"/><polygon points="22,8 36,16 36,28 22,36 8,28 8,16" fill="rgba(200,151,58,0.06)"/><text x="22" y="27" text-anchor="middle" font-family="Cormorant Garamond" font-size="12" fill="rgba(232,201,122,0.8)">МО</text></svg></div>
+          <div><div class="admin-name">Технический персонал</div><div class="admin-role">Обслуживание залов и оборудования</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Запишитесь на <em>пробное занятие</em></h2>
+    <p>Первое занятие бесплатно — приходите познакомиться с нашим дворцом</p>
+    <a class="btn-rose" href="index.html#programs">
+      ЗАПИСАТЬСЯ БЕСПЛАТНО
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a class="nav-logo" href="index.html" style="display:flex;margin-bottom:1rem">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:.7rem">
+          <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <ul><li><a href="about.html">О дворце</a></li><li><a href="about.html#team">Коллектив</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="gallery.html">Галерея</a></li><li><a href="rent.html">Арендаторам</a></li><li><a href="location.html">Контакты</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Направления</h4>
+      <ul><li><a href="index.html#programs">Художественная гимнастика</a></li><li><a href="index.html#programs">Хореография</a></li><li><a href="index.html#programs">ОФП</a></li><li><a href="index.html#programs">Стретчинг для взрослых</a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <div class="footer-contact">г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br><a href="tel:+78007005174">8 (800) 700-51-74</a><br><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a><br><br><a class="footer-contact-btn" href="location.html">КАК ДОБРАТЬСЯ →</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+  </div>
+</footer>
+
+<script>
+function openMob(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+function showTab(id, btn){
+  document.querySelectorAll('.team-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.team-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  // re-trigger reveals
+  document.querySelectorAll('#tab-'+id+' .reveal').forEach(el=>{ el.classList.remove('in'); setTimeout(()=>revObs.observe(el),50); });
+}
+
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+</script>
+</body>
+</html>

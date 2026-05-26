@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мероприятия — Дворец Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:     #130810;
+  --bg2:    #1E0D1A;
+  --bg3:    #2A1225;
+  --rose:   #C41F5E;
+  --rose-h: #E0256E;
+  --rose-p: #F5D0DF;
+  --gold:   #C8973A;
+  --gold-l: #E8C97A;
+  --white:  #FFFFFF;
+  --w80:    rgba(255,255,255,0.8);
+  --w50:    rgba(255,255,255,0.5);
+  --w20:    rgba(255,255,255,0.2);
+  --w08:    rgba(255,255,255,0.08);
+  --w04:    rgba(255,255,255,0.04);
+  --border: rgba(200,151,58,0.2);
+  --font-d: 'Cormorant Garamond', serif;
+  --font-b: 'Raleway', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-b); background: var(--bg); color: var(--white); font-size: 15px; line-height: 1.7; font-weight: 400; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* grain */
+body::before { content:''; position:fixed; inset:0; z-index:1000; pointer-events:none; opacity:.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:200px 200px; }
+
+/* ── NAV (same as index) ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:500; display:flex; align-items:center; justify-content:space-between; padding:1rem 4rem; background:rgba(19,8,16,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+.nav-logo { display:flex; align-items:center; gap:.9rem; }
+.nav-logo-gem { width:32px; height:37px; flex-shrink:0; }
+.nav-logo-text { font-family:var(--font-d); font-size:.78rem; font-weight:600; letter-spacing:.08em; line-height:1.35; color:var(--white); text-transform:uppercase; }
+.nav-links { display:flex; gap:2.2rem; list-style:none; }
+.nav-links a { font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--w80); transition:color .3s; font-weight:500; }
+.nav-links a:hover { color:var(--gold-l); }
+.nav-links a.active { color:var(--gold-l); border-bottom:1px solid var(--gold); padding-bottom:2px; }
+.nav-btn { font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; padding:.65rem 1.6rem; border:1px solid var(--rose); color:var(--white); background:transparent; cursor:pointer; font-family:var(--font-b); font-weight:600; transition:all .3s; }
+.nav-btn:hover { background:var(--rose); }
+.burger { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; padding:4px; }
+.burger span { display:block; width:24px; height:1.5px; background:var(--white); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  position: relative; padding: 9rem 4rem 5rem;
+  overflow: hidden;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-glow {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 120% at 80% 50%, rgba(196,31,94,0.12), transparent 60%),
+    radial-gradient(ellipse 40% 80% at 10% 80%, rgba(200,151,58,0.07), transparent 50%);
+  pointer-events: none;
+}
+.page-hero-crystal {
+  position: absolute; right: 4rem; top: 50%; transform: translateY(-50%);
+  opacity: .18; pointer-events: none;
+}
+.page-hero-crystal svg { width: 220px; height: 260px; }
+.page-hero-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; }
+.page-eyebrow { font-size:.63rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
+.page-eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+.page-title { font-family:var(--font-d); font-size:clamp(3rem,8vw,6.5rem); font-weight:300; line-height:.92; letter-spacing:-.02em; }
+.page-title em { font-style:italic; color:var(--gold-l); }
+.page-sub { font-size:.88rem; color:var(--w50); margin-top:1.2rem; max-width:440px; line-height:1.85; font-weight:300; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  position: sticky; top: 60px; z-index: 400;
+  background: rgba(19,8,16,0.96); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 4rem;
+}
+.filter-inner { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.filter-label { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--w50); flex-shrink:0; }
+.filter-tabs { display:flex; border:1px solid var(--border); }
+.f-tab { font-size:.63rem; letter-spacing:.15em; text-transform:uppercase; padding:.6rem 1.2rem; cursor:pointer; background:transparent; color:var(--w50); border:none; font-family:var(--font-b); font-weight:600; transition:all .3s; border-right:1px solid var(--border); }
+.f-tab:last-child { border-right:none; }
+.f-tab.active { background:var(--rose); color:var(--white); }
+.f-tab:hover:not(.active) { color:var(--gold-l); }
+.filter-months { display:flex; gap:.4rem; flex-wrap:wrap; }
+.m-btn { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; padding:.45rem .9rem; cursor:pointer; background:transparent; color:var(--w50); border:1px solid var(--border); font-family:var(--font-b); font-weight:500; transition:all .3s; }
+.m-btn.active { background:var(--gold); color:var(--bg); border-color:var(--gold); font-weight:600; }
+.m-btn:hover:not(.active) { border-color:var(--rose); color:var(--rose-p); }
+
+/* ── EVENTS MAIN ── */
+.events-main { padding: 4rem 4rem 7rem; max-width: 1300px; margin: 0 auto; }
+
+.year-block { margin-bottom: 5rem; }
+.year-label {
+  font-family: var(--font-d); font-size: clamp(4rem,8vw,7rem);
+  font-weight: 300; color: rgba(200,151,58,0.12); line-height: 1;
+  margin-bottom: 2rem; letter-spacing: -.03em;
+  border-bottom: 1px solid var(--border); padding-bottom: 1rem;
+}
+
+/* Featured event — big card */
+.event-featured {
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 2.5rem; align-items: center;
+  background: linear-gradient(135deg, rgba(196,31,94,0.18), rgba(42,18,37,1) 60%);
+  border: 1px solid rgba(196,31,94,0.3);
+  padding: 2.5rem 3rem; margin-bottom: 2px;
+  position: relative; overflow: hidden;
+  transition: border-color .3s;
+}
+.event-featured::before {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40%;
+  background: radial-gradient(ellipse 80% 80% at 80% 50%, rgba(196,31,94,0.15), transparent);
+  pointer-events: none;
+}
+.event-featured:hover { border-color: rgba(196,31,94,0.6); }
+.ef-badge {
+  position: absolute; top: 0; left: 3rem;
+  font-size:.55rem; letter-spacing:.22em; text-transform:uppercase;
+  background:var(--rose); color:var(--white); padding:.3rem .9rem; font-weight:700;
+}
+.ef-date { text-align: center; }
+.ef-day { font-family:var(--font-d); font-size:3.5rem; font-weight:300; color:var(--gold-l); line-height:1; }
+.ef-month { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--w50); }
+.ef-divider { width:1px; height:60px; background:linear-gradient(to bottom,transparent,var(--border),transparent); }
+.ef-body {}
+.ef-type { font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; padding:.2rem .6rem; background:rgba(196,31,94,0.25); color:#F0A8BB; display:inline-block; margin-bottom:.6rem; }
+.ef-type.gold { background:rgba(200,151,58,0.2); color:var(--gold-l); }
+.ef-title { font-family:var(--font-d); font-size:clamp(1.4rem,2.5vw,2rem); font-weight:400; line-height:1.2; margin-bottom:.5rem; }
+.ef-place { font-size:.78rem; color:var(--w50); }
+.ef-action a {
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-size:.63rem; letter-spacing:.16em; text-transform:uppercase;
+  padding:.85rem 1.8rem; background:var(--rose); color:var(--white);
+  font-family:var(--font-b); font-weight:600; transition:background .3s;
+  clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+}
+.ef-action a:hover { background:var(--rose-h); }
+.ef-action a svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; }
+
+/* Regular event row */
+.event-row {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  gap: 1.5rem; align-items: center;
+  background: var(--bg2); padding: 1.4rem 2rem;
+  border-left: 2px solid transparent; margin-bottom: 2px;
+  transition: all .25s; cursor: pointer;
+}
+.event-row:hover { border-left-color: var(--rose); background: var(--bg3); transform: translateX(3px); }
+.event-row.gold-ev:hover { border-left-color: var(--gold); }
+.event-row.past { opacity: .45; }
+.event-row.past:hover { opacity: .7; transform: none; }
+.er-date { text-align:center; }
+.er-day { font-family:var(--font-d); font-size:2rem; font-weight:300; color:var(--gold-l); line-height:1; }
+.er-month { font-size:.55rem; letter-spacing:.15em; text-transform:uppercase; color:var(--w50); }
+.er-body {}
+.er-tag { font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; padding:.18rem .55rem; display:inline-block; margin-bottom:.35rem; }
+.er-tag.comp { background:rgba(200,151,58,0.15); color:var(--gold-l); }
+.er-tag.show { background:rgba(196,31,94,0.18); color:#F0A8BB; }
+.er-tag.camp { background:rgba(60,140,80,0.15); color:#90D4A0; }
+.er-tag.seminar { background:rgba(60,100,200,0.15); color:#90B0F0; }
+.er-tag.rent { background:var(--w08); color:var(--w50); }
+.er-title { font-size:.9rem; font-weight:500; line-height:1.3; margin-bottom:.2rem; }
+.er-place { font-size:.72rem; color:var(--w50); }
+.er-action { flex-shrink:0; }
+.er-action a { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:.5rem 1rem; border:1px solid var(--border); color:var(--gold-l); font-family:var(--font-b); font-weight:600; transition:all .3s; display:inline-block; }
+.er-action a:hover { background:var(--gold); border-color:var(--gold); color:var(--bg); }
+.er-past-label { font-size:.6rem; color:var(--w50); letter-spacing:.1em; text-transform:uppercase; }
+
+/* empty */
+.empty { text-align:center; padding:5rem 2rem; }
+.empty h3 { font-family:var(--font-d); font-size:2rem; font-weight:300; color:var(--w50); margin-bottom:.5rem; }
+.empty p { font-size:.85rem; color:rgba(255,255,255,0.25); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background:var(--bg2); padding:5rem 4rem; text-align:center;
+  border-top:1px solid var(--border); position:relative; overflow:hidden;
+}
+.cta-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(196,31,94,0.1),transparent 60%); pointer-events:none; }
+.cta-inner { position:relative; z-index:1; }
+.cta-inner h2 { font-family:var(--font-d); font-size:clamp(2rem,4vw,3.2rem); font-weight:300; margin-bottom:.8rem; }
+.cta-inner h2 em { font-style:italic; color:var(--gold-l); }
+.cta-inner p { font-size:.88rem; color:var(--w50); margin-bottom:2rem; font-weight:300; }
+.btn-rose { display:inline-flex; align-items:center; gap:.8rem; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; padding:1rem 2.2rem; background:var(--rose); color:var(--white); border:none; cursor:pointer; font-family:var(--font-b); font-weight:600; transition:all .3s; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+.btn-rose:hover { background:var(--rose-h); }
+.btn-rose svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; }
+
+/* ── FOOTER ── */
+footer { background:rgba(10,4,9,1); padding:4rem 4rem 2rem; border-top:1px solid var(--border); }
+.footer-top { display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:3rem; max-width:1300px; margin:0 auto 3rem; }
+.footer-brand .nav-logo-text { font-size:.85rem; margin-bottom:1rem; }
+.footer-socials { display:flex; gap:.7rem; margin-top:1.5rem; }
+.footer-social { width:36px; height:36px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:all .3s; }
+.footer-social:hover { border-color:var(--rose); background:var(--rose); }
+.footer-social svg { width:16px; height:16px; fill:var(--w80); }
+.footer-col h4 { font-size:.63rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; font-weight:600; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.footer-col ul li a { font-size:.78rem; color:var(--w50); transition:color .3s; }
+.footer-col ul li a:hover { color:var(--gold-l); }
+.footer-contact { font-size:.78rem; color:var(--w50); line-height:1.7; }
+.footer-contact a { color:var(--w80); transition:color .3s; }
+.footer-contact a:hover { color:var(--gold-l); }
+.footer-contact-btn { display:inline-block; margin-top:.5rem; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:.5rem 1rem; border:1px solid var(--border); color:var(--gold-l); font-family:var(--font-b); font-weight:600; transition:all .3s; }
+.footer-contact-btn:hover { background:var(--gold); border-color:var(--gold); color:var(--bg); }
+.footer-bottom { max-width:1300px; margin:0 auto; padding-top:2rem; border-top:1px solid var(--w04); display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-size:.68rem; color:rgba(255,255,255,.2); }
+.footer-bottom-links { display:flex; gap:1.5rem; }
+.footer-bottom-links a { font-size:.65rem; color:rgba(255,255,255,.2); transition:color .3s; }
+.footer-bottom-links a:hover { color:var(--w50); }
+
+/* mobile menu */
+.mobile-menu { position:fixed; inset:0; z-index:600; background:rgba(19,8,16,.98); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; transform:translateX(100%); transition:transform .45s cubic-bezier(.16,1,.3,1); }
+.mobile-menu.open { transform:translateX(0); }
+.mobile-menu a { font-family:var(--font-d); font-size:2.2rem; font-weight:300; color:var(--w80); transition:color .3s; }
+.mobile-menu a:hover { color:var(--gold-l); }
+.mobile-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; cursor:pointer; color:var(--w50); font-size:1.8rem; padding:.5rem; line-height:1; }
+
+/* reveal */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+/* animate hero */
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none} }
+.page-eyebrow { animation:fadeUp .8s ease both .2s; }
+.page-title    { animation:fadeUp .8s ease both .35s; }
+.page-sub      { animation:fadeUp .8s ease both .5s; }
+
+/* responsive */
+@media (max-width:1024px) {
+  nav,.filter-bar,.events-main,.cta-band,footer,.page-hero { padding-left:2rem; padding-right:2rem; }
+  .nav-links,.nav-btn { display:none; }
+  .burger { display:flex; }
+  .event-featured { grid-template-columns:auto 1fr; }
+  .ef-action { display:none; }
+  .event-row { grid-template-columns:70px 1fr; }
+  .er-action { display:none; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; gap:1rem; text-align:center; }
+  .page-hero-crystal { display:none; }
+  .filter-inner { gap:1rem; }
+}
+@media (max-width:600px) {
+  .footer-top { grid-template-columns:1fr; }
+  .filter-tabs { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="index.html" onclick="closeMob()">Главная</a>
+  <a href="about.html" onclick="closeMob()">О дворце</a>
+  <a href="index.html#programs" onclick="closeMob()">Занятия</a>
+  <a href="#" onclick="closeMob()">Мероприятия</a>
+  <a href="rent.html" onclick="closeMob()">Арендаторам</a>
+  <a href="gallery.html" onclick="closeMob()">Галерея</a>
+  <a href="location.html" onclick="closeMob()">Контакты</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">О дворце</a></li>
+    <li><a href="index.html#programs">Занятия</a></li>
+    <li><a href="events.html" class="active">Мероприятия</a></li>
+    <li><a href="rent.html">Арендаторам</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="location.html">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="location.html">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="page-hero-crystal">
+    <svg viewBox="0 0 220 260" fill="none">
+      <polygon points="110,4 216,58 216,202 110,256 4,202 4,58" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.45)" stroke-width="1"/>
+      <polygon points="110,24 196,70 196,190 110,236 24,190 24,70" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.22)" stroke-width="0.6"/>
+      <polygon points="110,52 172,86 172,174 110,208 48,174 48,86" fill="rgba(196,31,94,0.06)"/>
+      <line x1="110" y1="4" x2="110" y2="52" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="216" y1="58" x2="172" y2="86" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="216" y1="202" x2="172" y2="174" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="110" y1="256" x2="110" y2="208" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="4" y1="202" x2="48" y2="174" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="4" y1="58" x2="48" y2="86" stroke="rgba(200,151,58,0.38)" stroke-width="0.7"/>
+      <line x1="110" y1="52" x2="172" y2="174" stroke="rgba(196,31,94,0.12)" stroke-width="0.5"/>
+      <line x1="110" y1="52" x2="48" y2="174" stroke="rgba(196,31,94,0.12)" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Дворец Ирины Винер</div>
+    <h1 class="page-title">ВСЕ<br><em>МЕРОПРИЯТИЯ</em></h1>
+    <p class="page-sub">Соревнования, показательные выступления, мастер-классы и сборы — полная афиша дворца и арендаторов.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Тип:</span>
+    <div class="filter-tabs">
+      <button class="f-tab active" onclick="filterType('all',this)">Все</button>
+      <button class="f-tab" onclick="filterType('comp',this)">Соревнования</button>
+      <button class="f-tab" onclick="filterType('show',this)">Показательные</button>
+      <button class="f-tab" onclick="filterType('camp',this)">Сборы</button>
+      <button class="f-tab" onclick="filterType('seminar',this)">Семинары</button>
+      <button class="f-tab" onclick="filterType('rent',this)">Арендаторы</button>
+    </div>
+    <span class="filter-label">Месяц:</span>
+    <div class="filter-months" id="monthFilters"></div>
+  </div>
+</div>
+
+<!-- EVENTS LIST -->
+<div class="events-main" id="eventsMain"></div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Хотите участвовать<br>в наших <em>соревнованиях?</em></h2>
+    <p>Запишитесь на пробное занятие и начните путь к первым медалям</p>
+    <a class="btn-rose" href="index.html#programs">
+      ЗАПИСАТЬСЯ БЕСПЛАТНО
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="margin-bottom:1rem;display:flex">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:.7rem">
+          <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <ul>
+        <li><a href="about.html">О дворце</a></li>
+        <li><a href="about.html#team">Коллектив</a></li>
+        <li><a href="events.html">Мероприятия</a></li>
+        <li><a href="gallery.html">Галерея</a></li>
+        <li><a href="rent.html">Арендаторам</a></li>
+        <li><a href="location.html">Контакты</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Направления</h4>
+      <ul>
+        <li><a href="index.html#programs">Художественная гимнастика</a></li>
+        <li><a href="index.html#programs">Хореография</a></li>
+        <li><a href="index.html#programs">ОФП</a></li>
+        <li><a href="index.html#programs">Стретчинг для взрослых</a></li>
+        <li><a href="index.html#programs">Гимнастика для взрослых</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <div class="footer-contact">
+        г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br>
+        <a href="tel:+78007005174">8 (800) 700-51-74</a><br>
+        <a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a><br><br>
+        <a class="footer-contact-btn" href="location.html">КАК ДОБРАТЬСЯ →</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links">
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Пользовательское соглашение</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const EVENTS = [
+  // 2025
+  {id:1, day:14, month:'июня',    mon:6,  year:2025, type:'comp',    title:'Открытый Кубок Дворца Ирины Винер',          place:'Главный зал · Ватутинки',       featured:true,  past:false},
+  {id:2, day:22, month:'июня',    mon:6,  year:2025, type:'show',    title:'Летний гала-концерт воспитанников',           place:'Главный зал · Ватутинки',       featured:false, past:false},
+  {id:3, day:5,  month:'июля',    mon:7,  year:2025, type:'rent',    title:'Чемпионат МО среди юниоров',                 place:'Главный зал · Ватутинки',       featured:false, past:false},
+  {id:4, day:19, month:'июля',    mon:7,  year:2025, type:'camp',    title:'Летний спортивный сбор — горная подготовка', place:'Кисловодск',                    featured:false, past:false},
+  {id:5, day:2,  month:'августа', mon:8,  year:2025, type:'rent',    title:'Первенство ЦФО по акробатике',               place:'Главный зал · Ватутинки',       featured:false, past:false},
+  {id:6, day:30, month:'августа', mon:8,  year:2025, type:'comp',    title:'Первенство России среди юниоров',            place:'Лужники, Москва',               featured:false, past:false},
+  {id:7, day:12, month:'сентября',mon:9,  year:2025, type:'seminar', title:'Мастер-класс по работе с лентой',            place:'Главный зал · Ватутинки',       featured:false, past:false},
+  {id:8, day:27, month:'сентября',mon:9,  year:2025, type:'comp',    title:'Кубок Москвы по художественной гимнастике',  place:'Дворец спорта, Москва',         featured:false, past:false},
+  {id:9, day:15, month:'октября', mon:10, year:2025, type:'show',    title:'Показательные выступления ко Дню учителя',   place:'Главный зал · Ватутинки',       featured:false, past:false},
+  {id:10,day:9,  month:'ноября',  mon:11, year:2025, type:'comp',    title:'Гран-при Ирины Винер',                       place:'Главный зал · Ватутинки',       featured:true,  past:false},
+  {id:11,day:22, month:'декабря', mon:12, year:2025, type:'show',    title:'Новогодний гала-концерт 2025',               place:'Главный зал · Ватутинки',       featured:false, past:false},
+  // 2024
+  {id:12,day:20, month:'апреля',  mon:4,  year:2024, type:'comp',    title:'Открытый Кубок Дворца — весна 2024',         place:'Главный зал · Ватутинки',       featured:false, past:true},
+  {id:13,day:7,  month:'июня',    mon:6,  year:2024, type:'show',    title:'Летний концерт воспитанников 2024',          place:'Главный зал · Ватутинки',       featured:false, past:true},
+  {id:14,day:10, month:'августа', mon:8,  year:2024, type:'camp',    title:'Летний сбор — крымская подготовка',          place:'Крым',                          featured:false, past:true},
+  {id:15,day:18, month:'октября', mon:10, year:2024, type:'comp',    title:'Кубок Москвы 2024',                          place:'Олимпийский, Москва',           featured:false, past:true},
+  {id:16,day:3,  month:'марта',   mon:3,  year:2024, type:'seminar', title:'Открытый мастер-класс для тренеров',         place:'Учебный зал · Ватутинки',       featured:false, past:true},
+  {id:17,day:25, month:'декабря', mon:12, year:2024, type:'show',    title:'Новогодний концерт 2024',                    place:'Главный зал · Ватутинки',       featured:false, past:true},
+];
+
+const TYPE_LABEL = {comp:'Соревнование', show:'Показательное', camp:'Сбор', seminar:'Семинар', rent:'Арендатор'};
+const TYPE_CLASS = {comp:'comp', show:'show', camp:'camp', seminar:'seminar', rent:'rent'};
+
+let activeType = 'all', activeMonth = null;
+
+function buildMonthFilters() {
+  const future = EVENTS.filter(e => !e.past);
+  const seen = new Set();
+  const months = [];
+  future.sort((a,b)=>a.mon-b.mon||a.day-b.day).forEach(e=>{
+    const key = e.mon+'|'+e.month;
+    if(!seen.has(key)){ seen.add(key); months.push({num:e.mon,label:e.month}); }
+  });
+  const c = document.getElementById('monthFilters');
+  const all = makeBtn('Все', true, ()=>{ activeMonth=null; c.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active')); all.classList.add('active'); render(); });
+  c.appendChild(all);
+  months.forEach(m=>{
+    const btn = makeBtn(cap(m.label), false, ()=>{ activeMonth=m.num; c.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); render(); });
+    c.appendChild(btn);
+  });
+}
+
+function makeBtn(text, active, fn) {
+  const b = document.createElement('button');
+  b.className = 'm-btn' + (active?' active':'');
+  b.textContent = text; b.onclick = fn; return b;
+}
+
+function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+function filterType(type, btn){
+  activeType = type;
+  document.querySelectorAll('.f-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function render(){
+  const container = document.getElementById('eventsMain');
+  const filtered = EVENTS.filter(e=>{
+    if(activeType!=='all' && e.type!==activeType) return false;
+    if(activeMonth && e.mon!==activeMonth) return false;
+    return true;
+  });
+
+  if(!filtered.length){
+    container.innerHTML = '<div class="empty"><h3>Мероприятий не найдено</h3><p>Попробуйте изменить фильтры</p></div>';
+    return;
+  }
+
+  const years = [...new Set(filtered.map(e=>e.year))].sort((a,b)=>b-a);
+  container.innerHTML = '';
+
+  years.forEach(year=>{
+    const yevs = filtered.filter(e=>e.year===year).sort((a,b)=>a.mon-b.mon||a.day-b.day);
+    const block = document.createElement('div');
+    block.className = 'year-block reveal';
+    block.innerHTML = `<div class="year-label">${year}</div>`;
+
+    yevs.forEach(ev=>{
+      if(ev.featured){
+        const el = document.createElement('div');
+        el.className = 'event-featured';
+        el.innerHTML = `
+          <div class="ef-badge">⭐ Главное событие</div>
+          <div class="ef-date"><div class="ef-day">${ev.day}</div><div class="ef-month">${cap(ev.month)}</div></div>
+          <div class="ef-divider"></div>
+          <div class="ef-body">
+            <span class="ef-type ${TYPE_CLASS[ev.type]}">${TYPE_LABEL[ev.type]}</span>
+            <div class="ef-title">${ev.title}</div>
+            <div class="ef-place">📍 ${ev.place}</div>
+          </div>
+          <div class="ef-action"><a href="index.html#programs">Зарегистрироваться <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+        `;
+        block.appendChild(el);
+      } else {
+        const el = document.createElement('div');
+        el.className = `event-row${ev.past?' past':''}${ev.type==='rent'?' gold-ev':''}`;
+        el.innerHTML = `
+          <div class="er-date"><div class="er-day">${ev.day}</div><div class="er-month">${cap(ev.month).slice(0,4).toUpperCase()}</div></div>
+          <div class="er-body">
+            <span class="er-tag ${TYPE_CLASS[ev.type]}">${TYPE_LABEL[ev.type]}</span>
+            <div class="er-title">${ev.title}</div>
+            <div class="er-place">📍 ${ev.place}</div>
+          </div>
+          <div class="er-action">${ev.past
+            ? '<span class="er-past-label">Завершено</span>'
+            : '<a href="index.html#programs">Зарегистрироваться</a>'
+          }</div>
+        `;
+        block.appendChild(el);
+      }
+    });
+
+    container.appendChild(block);
+  });
+
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>revObs.observe(el));
+}
+
+// reveal
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+function openMob(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+buildMonthFilters();
+render();
+</script>
+</body>
+</html>

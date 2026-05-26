@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерея — Дворец Ирины Винер</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#130810;--bg2:#1E0D1A;--bg3:#2A1225;
+  --rose:#C41F5E;--rose-h:#E0256E;--rose-p:#F5D0DF;
+  --gold:#C8973A;--gold-l:#E8C97A;
+  --white:#FFFFFF;
+  --w80:rgba(255,255,255,.8);--w50:rgba(255,255,255,.5);
+  --w20:rgba(255,255,255,.2);--w08:rgba(255,255,255,.08);--w04:rgba(255,255,255,.04);
+  --border:rgba(200,151,58,.2);
+  --font-d:'Cormorant Garamond',serif;--font-b:'Raleway',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--white);font-size:15px;line-height:1.7;font-weight:400;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(19,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:.9rem}
+.nav-logo-gem{width:32px;height:37px;flex-shrink:0}
+.nav-logo-text{font-family:var(--font-d);font-size:.78rem;font-weight:600;letter-spacing:.08em;line-height:1.35;color:var(--white);text-transform:uppercase}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--w80);transition:color .3s;font-weight:500}
+.nav-links a:hover{color:var(--gold-l)}
+.nav-links a.active{color:var(--gold-l);border-bottom:1px solid var(--gold);padding-bottom:2px}
+.nav-btn{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;padding:.65rem 1.6rem;border:1px solid var(--rose);color:var(--white);background:transparent;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s}
+.nav-btn:hover{background:var(--rose)}
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:24px;height:1.5px;background:var(--white)}
+
+/* PAGE HERO */
+.page-hero{position:relative;min-height:52vh;display:flex;align-items:flex-end;padding:0 4rem 5rem;overflow:hidden;background:var(--bg)}
+.hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 100% at 70% 40%,rgba(196,31,94,.12),transparent 55%),radial-gradient(ellipse 50% 80% at 5% 80%,rgba(200,151,58,.07),transparent 50%),linear-gradient(to top,rgba(19,8,16,.9) 0%,transparent 60%)}
+.hero-crystal{position:absolute;right:3rem;top:50%;transform:translateY(-50%);opacity:.16;pointer-events:none}
+.hero-crystal svg{width:300px;height:340px}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-title{font-family:var(--font-d);font-size:clamp(3.5rem,9vw,7rem);font-weight:300;line-height:.9;letter-spacing:-.02em}
+.hero-title em{font-style:italic;color:var(--gold-l);display:block}
+.hero-sub{font-size:.9rem;color:var(--w50);margin-top:1.4rem;max-width:420px;line-height:1.9;font-weight:300}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero-eyebrow{animation:fadeUp .8s ease both .2s}
+.hero-title{animation:fadeUp .8s ease both .38s}
+.hero-sub{animation:fadeUp .8s ease both .54s}
+
+/* FILTER BAR */
+.filter-bar{position:sticky;top:60px;z-index:400;background:rgba(19,8,16,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1.2rem 4rem}
+.filter-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.filter-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--w50);flex-shrink:0}
+.filter-tabs{display:flex;border:1px solid var(--border)}
+.f-tab{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;padding:.6rem 1.2rem;cursor:pointer;background:transparent;color:var(--w50);border:none;font-family:var(--font-b);font-weight:600;transition:all .3s;border-right:1px solid var(--border)}
+.f-tab:last-child{border-right:none}
+.f-tab.active{background:var(--rose);color:var(--white)}
+.f-tab:hover:not(.active){color:var(--gold-l)}
+.filter-count{font-size:.65rem;color:var(--w50);margin-left:auto}
+
+/* MASONRY GALLERY */
+.gallery-section{padding:3rem 4rem 6rem}
+.gallery-inner{max-width:1400px;margin:0 auto}
+
+.gallery-grid{
+  columns:4;
+  column-gap:3px;
+}
+.gallery-item{
+  break-inside:avoid;
+  margin-bottom:3px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  display:block;
+  background:var(--bg2);
+}
+.gallery-item.hidden{display:none}
+.gallery-thumb{
+  width:100%;
+  display:block;
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.gallery-item:hover .gallery-thumb{transform:scale(1.05)}
+.gallery-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(19,8,16,.85) 0%,rgba(19,8,16,.2) 50%,transparent 100%);
+  opacity:0;transition:opacity .35s;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;
+}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-item-tag{font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:.18rem .55rem;display:inline-block;margin-bottom:.4rem;width:fit-content}
+.gallery-item-tag.comp{background:rgba(200,151,58,.2);color:var(--gold-l)}
+.gallery-item-tag.training{background:rgba(196,31,94,.2);color:#F0A8BB}
+.gallery-item-tag.building{background:rgba(60,100,200,.15);color:#90B0F0}
+.gallery-item-tag.team{background:rgba(60,140,80,.15);color:#90D4A0}
+.gallery-item-caption{font-family:var(--font-d);font-size:.95rem;font-weight:400;color:var(--white);line-height:1.3}
+.gallery-zoom{
+  position:absolute;top:1rem;right:1rem;
+  width:32px;height:32px;background:rgba(19,8,16,.6);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;
+}
+.gallery-item:hover .gallery-zoom{opacity:1}
+.gallery-zoom svg{width:14px;height:14px;stroke:var(--gold-l);fill:none;stroke-width:2}
+
+/* placeholder thumb styles (SVG-based since no real photos) */
+.ph{width:100%;display:block;background:var(--bg3)}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(10,4,9,.96);backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:900px;width:100%;max-height:90vh}
+.lightbox-img{width:100%;max-height:80vh;object-fit:contain;display:block}
+.lightbox-svg{width:100%;max-height:80vh;display:block}
+.lightbox-close{position:absolute;top:-2.5rem;right:0;background:none;border:none;color:var(--w80);font-size:1.8rem;cursor:pointer;padding:.5rem;line-height:1;transition:color .3s}
+.lightbox-close:hover{color:var(--rose-p)}
+.lightbox-caption{margin-top:1rem;font-family:var(--font-d);font-size:1.1rem;color:var(--w80);text-align:center}
+.lightbox-tag-wrap{text-align:center;margin-top:.4rem}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(19,8,16,.7);border:1px solid var(--border);color:var(--w80);width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;transition:all .3s}
+.lightbox-nav:hover{border-color:var(--gold);color:var(--gold-l)}
+.lightbox-nav.prev{left:-56px}
+.lightbox-nav.next{right:-56px}
+
+/* CTA */
+.cta-band{background:var(--bg2);padding:5rem 4rem;text-align:center;border-top:1px solid var(--border);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(196,31,94,.1),transparent 60%);pointer-events:none}
+.cta-inner{position:relative;z-index:1}
+.cta-inner h2{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-bottom:.8rem}
+.cta-inner h2 em{font-style:italic;color:var(--gold-l)}
+.cta-inner p{font-size:.88rem;color:var(--w50);margin-bottom:2rem;font-weight:300}
+.btn-rose{display:inline-flex;align-items:center;gap:.8rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:1rem 2.2rem;background:var(--rose);color:var(--white);border:none;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn-rose:hover{background:var(--rose-h)}
+.btn-rose svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* FOOTER */
+footer{background:rgba(10,4,9,1);padding:4rem 4rem 2rem;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:3rem;max-width:1300px;margin:0 auto 3rem}
+.footer-socials{display:flex;gap:.7rem;margin-top:1.5rem}
+.footer-social{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.footer-social:hover{border-color:var(--rose);background:var(--rose)}
+.footer-social svg{width:16px;height:16px;fill:var(--w80)}
+.footer-col h4{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.footer-col ul li a{font-size:.78rem;color:var(--w50);transition:color .3s}
+.footer-col ul li a:hover{color:var(--gold-l)}
+.footer-contact{font-size:.78rem;color:var(--w50);line-height:1.7}
+.footer-contact a{color:var(--w80);transition:color .3s}
+.footer-contact a:hover{color:var(--gold-l)}
+.footer-contact-btn{display:inline-block;margin-top:.5rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1rem;border:1px solid var(--border);color:var(--gold-l);font-family:var(--font-b);font-weight:600;transition:all .3s}
+.footer-contact-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.footer-bottom{max-width:1300px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--w04);display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.68rem;color:rgba(255,255,255,.2)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:.65rem;color:rgba(255,255,255,.2);transition:color .3s}
+.footer-bottom-links a:hover{color:var(--w50)}
+
+/* mobile */
+.mobile-menu{position:fixed;inset:0;z-index:600;background:rgba(19,8,16,.98);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{font-family:var(--font-d);font-size:2.2rem;font-weight:300;color:var(--w80);transition:color .3s}
+.mobile-menu a:hover{color:var(--gold-l)}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;color:var(--w50);font-size:1.8rem;padding:.5rem;line-height:1}
+
+/* upload hint banner */
+.upload-hint{background:var(--bg3);border:1px dashed rgba(200,151,58,.3);padding:1rem 1.5rem;margin-bottom:3px;display:flex;align-items:center;gap:1rem;font-size:.75rem;color:var(--w50)}
+.upload-hint svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;flex-shrink:0}
+.upload-hint strong{color:var(--gold-l)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:1200px){.gallery-grid{columns:3}}
+@media(max-width:900px){
+  nav,.page-hero,.gallery-section,.filter-bar,.cta-band,footer{padding-left:2rem;padding-right:2rem}
+  .nav-links,.nav-btn{display:none}
+  .burger{display:flex}
+  .gallery-grid{columns:2}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .hero-crystal{display:none}
+  .lightbox-nav.prev{left:-48px}
+  .lightbox-nav.next{right:-48px}
+}
+@media(max-width:540px){
+  .gallery-grid{columns:1}
+  .footer-top{grid-template-columns:1fr}
+  .lightbox-nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="index.html">Главная</a>
+  <a href="about.html">О дворце</a>
+  <a href="index.html#programs">Занятия</a>
+  <a href="events.html">Мероприятия</a>
+  <a href="rent.html">Арендаторам</a>
+  <a href="gallery.html">Галерея</a>
+  <a href="location.html">Контакты</a>
+</div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none">
+      <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+      <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+      <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+      <line x1="19" y1="1" x2="19" y2="12" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="10" x2="27" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="37" y1="34" x2="27" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="19" y1="43" x2="19" y2="32" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="34" x2="11" y2="27" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+      <line x1="1" y1="10" x2="11" y2="17" stroke="#C8973A" stroke-width="0.7" opacity="0.7"/>
+    </svg>
+    <span class="nav-logo-text">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">О дворце</a></li>
+    <li><a href="index.html#programs">Занятия</a></li>
+    <li><a href="events.html">Мероприятия</a></li>
+    <li><a href="rent.html">Арендаторам</a></li>
+    <li><a href="gallery.html" class="active">Галерея</a></li>
+    <li><a href="location.html">Контакты</a></li>
+  </ul>
+  <a class="nav-btn" href="location.html">Обратная связь</a>
+  <button class="burger" onclick="openMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-crystal">
+    <svg viewBox="0 0 300 340" fill="none">
+      <polygon points="150,4 292,72 292,268 150,336 8,268 8,72" fill="rgba(196,31,94,0.08)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
+      <polygon points="150,28 262,86 262,254 150,312 38,254 38,86" fill="rgba(200,151,58,0.04)" stroke="rgba(200,151,58,0.18)" stroke-width=".6"/>
+      <polygon points="150,62 226,104 226,236 150,278 74,236 74,104" fill="rgba(196,31,94,0.06)"/>
+      <line x1="150" y1="4" x2="150" y2="62" stroke="rgba(200,151,58,0.45)" stroke-width=".8"/>
+      <line x1="292" y1="72" x2="226" y2="104" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="292" y1="268" x2="226" y2="236" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="150" y1="336" x2="150" y2="278" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="8" y1="268" x2="74" y2="236" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="8" y1="72" x2="74" y2="104" stroke="rgba(200,151,58,0.35)" stroke-width=".7"/>
+      <line x1="150" y1="62" x2="226" y2="236" stroke="rgba(196,31,94,0.1)" stroke-width=".5"/>
+      <line x1="150" y1="62" x2="74" y2="236" stroke="rgba(196,31,94,0.1)" stroke-width=".5"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Дворец Ирины Винер</div>
+    <h1 class="hero-title">ГАЛЕРЕЯ<br><em>ДВОРЦА</em></h1>
+    <p class="hero-sub">Фотографии соревнований, тренировок, архитектуры здания и жизни нашего коллектива.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Категория:</span>
+    <div class="filter-tabs">
+      <button class="f-tab active" onclick="filterGallery('all',this)">Все фото</button>
+      <button class="f-tab" onclick="filterGallery('comp',this)">Соревнования</button>
+      <button class="f-tab" onclick="filterGallery('training',this)">Тренировки</button>
+      <button class="f-tab" onclick="filterGallery('building',this)">Здание</button>
+      <button class="f-tab" onclick="filterGallery('team',this)">Команда</button>
+    </div>
+    <span class="filter-count" id="filterCount">24 фото</span>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-section">
+  <div class="gallery-inner">
+
+    <!-- Upload hint -->
+    <div class="upload-hint reveal">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <span><strong>Как добавить реальные фото:</strong> замените SVG-плейсхолдеры тегами &lt;img src="ваше-фото.jpg"&gt; с нужными пропорциями. Поддерживается любое соотношение сторон — masonry-сетка адаптируется автоматически.</span>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- items rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-nav prev" onclick="lightboxNav(-1)">‹</button>
+    <button class="lightbox-nav next" onclick="lightboxNav(1)">›</button>
+    <div id="lightboxContent"></div>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <div class="lightbox-tag-wrap" id="lightboxTag"></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Станьте частью нашей <em>истории</em></h2>
+    <p>Запишитесь на пробное занятие — и ваши фото тоже украсят эту галерею</p>
+    <a class="btn-rose" href="index.html#programs">
+      ЗАПИСАТЬСЯ БЕСПЛАТНО
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a class="nav-logo" href="index.html" style="display:flex;margin-bottom:1rem">
+        <svg class="nav-logo-gem" viewBox="0 0 38 44" fill="none" style="width:32px;height:37px;margin-right:.7rem">
+          <polygon points="19,1 37,10 37,34 19,43 1,34 1,10" fill="rgba(196,31,94,0.15)" stroke="#C8973A" stroke-width="1"/>
+          <polygon points="19,6 32,13 32,31 19,38 6,31 6,13" fill="rgba(200,151,58,0.08)" stroke="#C8973A" stroke-width="0.5"/>
+          <polygon points="19,12 27,17 27,27 19,32 11,27 11,17" fill="rgba(196,31,94,0.2)"/>
+        </svg>
+        <span class="nav-logo-text" style="font-size:.75rem">ДВОРЕЦ СПОРТА<br>И ОБРАЗОВАНИЯ<br>ИРИНЫ ВИНЕР В ВАТУТИНКАХ</span>
+      </a>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://vk.com/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.08 13.27h-1.52c-.57 0-.75-.46-1.78-1.5-.89-.87-1.29-.99-1.51-.99-.31 0-.4.09-.4.52v1.37c0 .37-.12.59-1.11.59-1.63 0-3.44-1-4.71-2.86C5.56 10.44 5.2 8.68 5.2 8.33c0-.22.09-.43.52-.43H7.24c.39 0 .54.17.69.61.76 2.19 2.02 4.11 2.54 4.11.19 0 .28-.09.28-.58V9.72c-.06-1.05-.62-1.14-.62-1.52 0-.18.15-.36.38-.36h2.39c.33 0 .44.17.44.55v2.96c0 .33.14.44.23.44.19 0 .35-.11.7-.46 1.08-1.21 1.85-3.06 1.85-3.06.1-.22.29-.43.68-.43h1.52c.46 0 .56.24.46.55-.19.87-2.03 3.48-2.03 3.48-.16.26-.22.38 0 .67.16.21.69.67 1.04 1.08.65.74 1.14 1.36 1.27 1.79.13.42-.09.64-.51.64z"/></svg></a>
+        <a class="footer-social" href="https://t.me/center_viner_vatutinki" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg></a>
+        <a class="footer-social" href="https://youtube.com" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Навигация</h4><ul><li><a href="about.html">О дворце</a></li><li><a href="about.html#team">Коллектив</a></li><li><a href="events.html">Мероприятия</a></li><li><a href="gallery.html">Галерея</a></li><li><a href="rent.html">Арендаторам</a></li><li><a href="location.html">Контакты</a></li></ul></div>
+    <div class="footer-col"><h4>Направления</h4><ul><li><a href="index.html#programs">Художественная гимнастика</a></li><li><a href="index.html#programs">Хореография</a></li><li><a href="index.html#programs">ОФП</a></li><li><a href="index.html#programs">Стретчинг для взрослых</a></li></ul></div>
+    <div class="footer-col"><h4>Контакты</h4><div class="footer-contact">г. Москва, пос. Десёновское,<br>ул. Ватутинки, 36<br><br><a href="tel:+78007005174">8 (800) 700-51-74</a><br><a href="mailto:admin@gympalace.ru">admin@gympalace.ru</a><br><br><a class="footer-contact-btn" href="location.html">КАК ДОБРАТЬСЯ →</a></div></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 ООО «Новое поколение художественной гимнастики»</div>
+    <div class="footer-bottom-links"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></div>
+  </div>
+</footer>
+
+<script>
+function openMob(){ document.getElementById('mobileMenu').classList.add('open'); }
+function closeMob(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+// ─── GALLERY DATA ───
+// Each item: cat, caption, aspect ratio (h/w * 100 for padding-bottom %), colours for placeholder
+const ITEMS = [
+  {cat:'comp',     caption:'Открытый Кубок Дворца Ирины Винер 2024',   ar:130, c1:'rgba(196,31,94,0.25)',  c2:'rgba(200,151,58,0.15)'},
+  {cat:'building', caption:'Главный зал — вид со стороны трибун',       ar:68,  c1:'rgba(200,151,58,0.2)',  c2:'rgba(196,31,94,0.1)'},
+  {cat:'training', caption:'Тренировка группы спортивной специализации', ar:100, c1:'rgba(196,31,94,0.2)',  c2:'rgba(60,10,50,0.4)'},
+  {cat:'team',     caption:'Наши тренеры на церемонии открытия',        ar:75,  c1:'rgba(200,151,58,0.15)', c2:'rgba(196,31,94,0.2)'},
+  {cat:'comp',     caption:'Выступление на Гран-при Ирины Винер',       ar:120, c1:'rgba(196,31,94,0.3)',  c2:'rgba(200,151,58,0.1)'},
+  {cat:'building', caption:'Фасад здания — кристалл на закате',         ar:90,  c1:'rgba(200,151,58,0.25)', c2:'rgba(60,10,50,0.5)'},
+  {cat:'training', caption:'Работа с лентой — группа 10–11 лет',        ar:115, c1:'rgba(196,31,94,0.22)', c2:'rgba(200,151,58,0.08)'},
+  {cat:'comp',     caption:'Награждение победителей — золото',           ar:72,  c1:'rgba(200,151,58,0.3)',  c2:'rgba(196,31,94,0.1)'},
+  {cat:'building', caption:'Прозрачная крыша — естественный свет',      ar:140, c1:'rgba(200,151,58,0.18)', c2:'rgba(196,31,94,0.08)'},
+  {cat:'team',     caption:'Команда тренеров после соревнований',        ar:80,  c1:'rgba(196,31,94,0.18)', c2:'rgba(200,151,58,0.12)'},
+  {cat:'training', caption:'Хореографический класс — балетный станок',  ar:125, c1:'rgba(196,31,94,0.15)', c2:'rgba(200,151,58,0.2)'},
+  {cat:'comp',     caption:'Кубок Москвы 2024 — групповое упражнение',  ar:68,  c1:'rgba(196,31,94,0.28)', c2:'rgba(200,151,58,0.1)'},
+  {cat:'building', caption:'Вестибюль дворца — декоративное освещение', ar:110, c1:'rgba(200,151,58,0.22)', c2:'rgba(196,31,94,0.12)'},
+  {cat:'training', caption:'Утренняя разминка — группа ОФП',            ar:85,  c1:'rgba(196,31,94,0.2)',  c2:'rgba(60,10,50,0.35)'},
+  {cat:'comp',     caption:'Показательные выступления — гала-концерт',  ar:95,  c1:'rgba(196,31,94,0.32)', c2:'rgba(200,151,58,0.12)'},
+  {cat:'team',     caption:'Воспитанники на пьедестале почёта',          ar:130, c1:'rgba(200,151,58,0.2)',  c2:'rgba(196,31,94,0.15)'},
+  {cat:'building', caption:'Академия единоборств — вид сверху',          ar:70,  c1:'rgba(200,151,58,0.15)', c2:'rgba(196,31,94,0.1)'},
+  {cat:'training', caption:'Работа с мячом — начальная подготовка',     ar:118, c1:'rgba(196,31,94,0.18)', c2:'rgba(200,151,58,0.15)'},
+  {cat:'comp',     caption:'Первенство России — финальный выход',        ar:88,  c1:'rgba(196,31,94,0.25)', c2:'rgba(200,151,58,0.08)'},
+  {cat:'team',     caption:'Руководство дворца с победителями',          ar:75,  c1:'rgba(200,151,58,0.2)',  c2:'rgba(196,31,94,0.18)'},
+  {cat:'building', caption:'Ночная подсветка фасада',                    ar:145, c1:'rgba(196,31,94,0.2)',  c2:'rgba(200,151,58,0.25)'},
+  {cat:'training', caption:'Акробатика — группа совершенствования',      ar:92,  c1:'rgba(196,31,94,0.22)', c2:'rgba(60,10,50,0.4)'},
+  {cat:'comp',     caption:'Летний гала-концерт воспитанников',          ar:78,  c1:'rgba(196,31,94,0.3)',  c2:'rgba(200,151,58,0.1)'},
+  {cat:'team',     caption:'День открытых дверей — знакомство с дворцом',ar:100, c1:'rgba(200,151,58,0.18)', c2:'rgba(196,31,94,0.15)'},
+];
+
+const TAG_LABELS = {comp:'Соревнование', training:'Тренировка', building:'Здание', team:'Команда'};
+
+let activeFilter = 'all';
+let visibleItems = [];
+let lightboxIdx = 0;
+
+function makePlaceholder(item, forLightbox=false){
+  const w = forLightbox ? 800 : 400;
+  const h = forLightbox ? Math.round(800 * item.ar / 100) : Math.round(400 * item.ar / 100);
+  return `<svg class="${forLightbox?'lightbox-svg':'ph'}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <rect width="${w}" height="${h}" fill="var(--bg3)"/>
+    <rect width="${w}" height="${h}" fill="url(#g${w}${h})"/>
+    <defs>
+      <linearGradient id="g${w}${h}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${item.c1}"/>
+        <stop offset="100%" stop-color="${item.c2}"/>
+      </linearGradient>
+    </defs>
+    <polygon points="${w*.5},${h*.18} ${w*.72},${h*.32} ${w*.72},${h*.58} ${w*.5},${h*.72} ${w*.28},${h*.58} ${w*.28},${h*.32}" fill="rgba(200,151,58,0.08)" stroke="rgba(200,151,58,0.25)" stroke-width="1"/>
+    <line x1="${w*.5}" y1="${h*.18}" x2="${w*.5}" y2="${h*.28}" stroke="rgba(200,151,58,0.3)" stroke-width=".8"/>
+    <text x="${w/2}" y="${h/2+6}" text-anchor="middle" font-family="Raleway,sans-serif" font-size="${forLightbox?16:11}" fill="rgba(255,255,255,0.18)" letter-spacing="2">ФОТО</text>
+    <text x="${w/2}" y="${h/2+${forLightbox?30:20}}" text-anchor="middle" font-family="Raleway,sans-serif" font-size="${forLightbox?12:9}" fill="rgba(200,151,58,0.35)" letter-spacing="1">заменить на реальное</text>
+  </svg>`;
+}
+
+function renderGallery(){
+  const grid = document.getElementById('galleryGrid');
+  visibleItems = ITEMS.filter(it => activeFilter==='all' || it.cat===activeFilter);
+  document.getElementById('filterCount').textContent = visibleItems.length + ' фото';
+
+  grid.innerHTML = '';
+  visibleItems.forEach((item, idx) => {
+    const el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.innerHTML = `
+      ${makePlaceholder(item)}
+      <div class="gallery-overlay">
+        <span class="gallery-item-tag ${item.cat}">${TAG_LABELS[item.cat]}</span>
+        <div class="gallery-item-caption">${item.caption}</div>
+      </div>
+      <div class="gallery-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+    `;
+    el.onclick = () => openLightbox(idx);
+    grid.appendChild(el);
+  });
+}
+
+function filterGallery(cat, btn){
+  activeFilter = cat;
+  document.querySelectorAll('.f-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderGallery();
+}
+
+// LIGHTBOX
+function openLightbox(idx){
+  lightboxIdx = idx;
+  showLightboxItem();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLightboxItem(){
+  const item = visibleItems[lightboxIdx];
+  document.getElementById('lightboxContent').innerHTML = makePlaceholder(item, true);
+  document.getElementById('lightboxCaption').textContent = item.caption;
+  document.getElementById('lightboxTag').innerHTML = `<span class="gallery-item-tag ${item.cat}" style="margin-top:.4rem">${TAG_LABELS[item.cat]}</span>`;
+}
+
+function lightboxNav(dir){
+  lightboxIdx = (lightboxIdx + dir + visibleItems.length) % visibleItems.length;
+  showLightboxItem();
+}
+
+function closeLightbox(e){
+  if(e && e.target !== document.getElementById('lightbox')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// keyboard nav
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='Escape') closeLightbox({target:document.getElementById('lightbox')});
+  if(e.key==='ArrowRight') lightboxNav(1);
+  if(e.key==='ArrowLeft') lightboxNav(-1);
+});
+
+// reveal
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+renderGallery();
+</script>
+</body>
+</html>
