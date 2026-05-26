@@ -86,11 +86,15 @@ nav.scrolled {
 /* Simulated building with crystal shapes since no real photo */
 .hero-visual {
   position: absolute; inset: 0; z-index: 0;
-  background: 
-    radial-gradient(ellipse 80% 70% at 75% 40%, rgba(60,10,50,1) 0%, rgba(30,5,25,1) 40%, var(--bg) 100%);
+  background: var(--bg);
 }
-.hero-crystal-bg { position: absolute; right: 0; top: 0; bottom: 0; width: 65%; z-index: 0; }
-.hero-crystal-bg svg { width: 100%; height: 100%; }
+.hero-photo {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('hero.png');
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+}
 .hero-content { position: relative; z-index: 2; max-width: 620px; }
 .hero-slide-num {
   position: absolute; right: 4rem; bottom: 6rem; z-index: 2;
@@ -458,34 +462,7 @@ footer { background: rgba(10,4,9,1); padding: 4rem 4rem 2rem; border-top: 1px so
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-visual">
-    <!-- Crystal building silhouette -->
-    <svg class="hero-crystal-bg" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;right:0;top:0;bottom:0;width:65%;height:100%">
-      <!-- Main crystal structure -->
-      <polygon points="450,50 820,200 820,550 450,680 80,550 80,200" fill="rgba(60,10,50,0.4)" stroke="rgba(200,151,58,0.3)" stroke-width="1"/>
-      <polygon points="450,120 750,230 750,500 450,610 150,500 150,230" fill="rgba(196,31,94,0.08)" stroke="rgba(196,31,94,0.2)" stroke-width="0.8"/>
-      <!-- Crystal spires -->
-      <polygon points="450,50 550,180 450,200 350,180" fill="rgba(200,151,58,0.15)" stroke="rgba(200,151,58,0.4)" stroke-width="1"/>
-      <polygon points="600,100 680,220 600,240 520,220" fill="rgba(196,31,94,0.12)" stroke="rgba(196,31,94,0.3)" stroke-width="0.8"/>
-      <polygon points="300,90 390,210 300,230 210,210" fill="rgba(200,151,58,0.1)" stroke="rgba(200,151,58,0.3)" stroke-width="0.8"/>
-      <polygon points="700,150 760,250 700,270 640,250" fill="rgba(196,31,94,0.1)" stroke="rgba(196,31,94,0.25)" stroke-width="0.6"/>
-      <!-- Internal facets -->
-      <line x1="450" y1="50" x2="450" y2="200" stroke="rgba(200,151,58,0.25)" stroke-width="0.8"/>
-      <line x1="820" y1="200" x2="750" y2="230" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
-      <line x1="820" y1="550" x2="750" y2="500" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
-      <line x1="450" y1="680" x2="450" y2="610" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
-      <line x1="80" y1="550" x2="150" y2="500" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
-      <line x1="80" y1="200" x2="150" y2="230" stroke="rgba(200,151,58,0.2)" stroke-width="0.6"/>
-      <!-- Cross facets -->
-      <line x1="450" y1="200" x2="750" y2="500" stroke="rgba(196,31,94,0.1)" stroke-width="0.5"/>
-      <line x1="450" y1="200" x2="150" y2="500" stroke="rgba(196,31,94,0.1)" stroke-width="0.5"/>
-      <line x1="450" y1="120" x2="750" y2="230" stroke="rgba(200,151,58,0.12)" stroke-width="0.5"/>
-      <line x1="450" y1="120" x2="150" y2="230" stroke="rgba(200,151,58,0.12)" stroke-width="0.5"/>
-      <!-- Glow effect -->
-      <ellipse cx="450" cy="380" rx="200" ry="180" fill="rgba(196,31,94,0.06)"/>
-      <ellipse cx="600" cy="250" rx="100" ry="80" fill="rgba(200,151,58,0.08)"/>
-    </svg>
-  </div>
+  <div class="hero-photo"></div>
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Новая Москва · Ватутинки</div>
