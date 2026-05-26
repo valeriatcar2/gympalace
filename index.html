@@ -173,13 +173,12 @@ nav.scrolled {
   transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
 }
 .tcard:hover .tcard-bg { transform: scale(1.06); }
-.tcard-bg-1 { background: linear-gradient(135deg, #3D0A25 0%, #1A0510 50%, #0D0308 100%); }
-.tcard-bg-2 { background: linear-gradient(135deg, #1A0C2E 0%, #0D0518 50%, #060210 100%); }
-.tcard-bg-3 { background: linear-gradient(135deg, #2E0D1A 0%, #180810 50%, #0A0408 100%); }
-/* Decorative shimmer per card */
-.tcard-bg-1::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(196,31,94,0.3), transparent 60%); }
-.tcard-bg-2::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 50% 20%, rgba(200,151,58,0.2), transparent 60%); }
-.tcard-bg-3::after { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 60% 60% at 20% 20%, rgba(196,31,94,0.25), transparent 60%); }
+.tcard-bg-1 { background-image: url('card_sport.png'); background-size: cover; background-position: center top; }
+.tcard-bg-2 { background-image: url('card_hall.png'); background-size: cover; background-position: center center; }
+.tcard-bg-3 { background-image: url('card_events.png'); background-size: cover; background-position: center bottom; }
+.tcard-bg-1::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(10,3,8,0.85) 0%, rgba(10,3,8,0.2) 60%, transparent 100%); }
+.tcard-bg-2::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(10,3,8,0.85) 0%, rgba(10,3,8,0.2) 60%, transparent 100%); }
+.tcard-bg-3::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(10,3,8,0.85) 0%, rgba(10,3,8,0.2) 60%, transparent 100%); }
 .tcard-overlay { position:absolute; inset:0; z-index:1; background: linear-gradient(to top, rgba(10,3,8,0.85) 0%, rgba(10,3,8,0.2) 60%, transparent 100%); }
 .tcard-content { position: relative; z-index: 2; }
 .tcard-tag {
